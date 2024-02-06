@@ -1,10 +1,12 @@
 //Global Vars
-float x, y, dia;
-color col;
+
 
 void setup() {
   fullScreen();
-  ellipse(x, y, dia, dia); //ball
+  //an object is see the CLASS
+  Ball myBall = new Ball();
+  Ball yourBall = new Ball();
+  //ellipse(x, y, dia, dia); //ball
   /*screenSizeChecker(); for landscape, portrait, square views.
   Updated automatically for screen rotation on android.
   */
