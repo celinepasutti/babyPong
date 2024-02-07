@@ -12,8 +12,11 @@ void setup() {
   myBall.ballY = startBallY;
   myBall.ballDia = referentMeasure*1/20;
   myBall.ballCol = color (random(0, 255), random(0, 255), random(0, 255)) ; //random(255) also applicable. Casting from float to int.
-  
+  //fill(myBall.ballCol); //MUST reset the default.
   //ellipse(x, y, dia, dia); //ball
+  //fill(0); //grayscale: 0 - 255 in shades of gray. RESET TO GRAYSCALE.s
+  
+ 
   //Ball yourBall = new Ball();
   //yourBall.ballX = 
   /*screenSizeChecker(); for landscape, portrait, square views.
