@@ -7,10 +7,11 @@ void setup() {
   Ball myBall = new Ball(); // half of the constructor
   int startBallX = displayWidth*1/2;
   int startBallY = displayHeight*1/2;
-  int referentMeasures = (displayWidth < displayHeight) ? displayWidth: displayHeight; //review ternary operator
+  int referentMeasure = (displayWidth < displayHeight) ? displayWidth: displayHeight; //review ternary operator
   myBall.ballX = startBallX; //spawn myBall in the middle of the display
   myBall.ballY = startBallY;
-  myBall.ballDia = 
+  myBall.ballDia = referentMeasure*1/20;
+  myBall.ballCol = color (random(0, 255), random(0, 255), random(0, 255)) ; //random(255) also applicable. Casting from float to int.
   
   //ellipse(x, y, dia, dia); //ball
   //Ball yourBall = new Ball();
