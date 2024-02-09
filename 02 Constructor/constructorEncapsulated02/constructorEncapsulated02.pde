@@ -1,11 +1,10 @@
 //Global Vars and objects
 Ball myBall; //both halves of the constructor.
+  //Ball yourBall = new Ball(); 
 
 
 void setup() {
   fullScreen();
-  //Ball yourBall = new Ball();
-  //yourBall.ballX = 
   /*screenSizeChecker(); for landscape, portrait, square views.
   Updated automatically for screen rotation on android.
   */
