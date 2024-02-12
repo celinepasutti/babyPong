@@ -39,10 +39,10 @@ class Ball {
   }//endBallStep
   
   void bounce() {
-    if (x < 0 || x > displayWidth) {
-      xSpeed *= xDir;
+    if (x < 0+(dia/2) || x > displayWidth-(dia/2)) {
+      xSpeed *=  xDir;
     }
-    if(y < 0 || y > displayHeight) {
+    if(y < 0+(dia/2) || y > displayHeight-(dia/2)) {
       ySpeed *= yDir;
     }
   }//endBallBounce
