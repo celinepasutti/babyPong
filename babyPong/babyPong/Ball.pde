@@ -1,3 +1,5 @@
+/*known ERRORS:
+night mode - ball color is full blue*/
 class Ball {
   //Ball Global Vars
   float x, y, dia;
@@ -20,8 +22,8 @@ class Ball {
     ballCol = color (random(0, 255), random(0, 255), random(0, 255)); //random(255) also applicable. Casting from float to int.
     xSpeed = displayWidth/displayWidth;
     ySpeed = displayHeight/displayHeight;
-    xDir = -1; //hard code !!!will change.
-    yDir = -1; //hard code !!!will change.
+    xDir = int(random(-1, 1); //hard code !!!will change.
+    yDir = int(random(-1, 1); //hard code !!!will change.
   } //end constructor
   
   void draw() {
