@@ -5,7 +5,7 @@ class Ball {
   float x, y, dia;
   color ballCol;
   float xSpeed, ySpeed;
-  float xDir, yDir;
+  float xSpeedChange, ySpeedChange;
   
   
   //constructor
@@ -20,27 +20,27 @@ class Ball {
     y = starty;
     dia = referentMeasure*1/20;
     ballCol = color (random(0, 255), random(0, 255), random(0, 255)); //random(255) also applicable. Casting from float to int.
-    xSpeed = displayWidth/displayWidth;
-    ySpeed = displayHeight/displayHeight;
-    xDir = xDir();
-    yDir = yDir();
+    xSpeed = 3*xSpeedChange();
+    ySpeed = 3*ySpeedChange();
+    xSpeedChange = 1;
+    ySpeedChange = 1;
   } //end constructor
   
-  float xDir() {
-    float xDir = int (random(-2, 2));
-    while (xDir == 0) {
-      xDir = int (random(-2, 2)); //variable must be populated FIRST!
+  float xSpeedChange() {
+    float xSpeedChange = int (random(-2, 2));
+    while (xSpeedChange == 0) {
+      xSpeedChange = int (random(-2, 2)); //variable must be populated FIRST!
     }
-    return xDir;
-  }//end xDir
+    return xSpeedChange;
+  }//end xSpeedChange
   
-  float yDir() {
-    float yDir = int (random(-2, 2));
-    while (yDir == 0) {
-      yDir = int (random(-2, 2));
+  float ySpeedChange() {
+    float ySpeedChange = int (random(-2, 2)); //THIS IS THE CODE FOR CHANGING THE SPEED!!!!!!!!!!!11111!!!!!!1!11!!
+    while (ySpeedChange == 0) {
+      ySpeedChange = int (random(-2, 2));
     }
-    return yDir;
-  }// end yDir
+    return ySpeedChange;
+  }// end ySpeedChange
   
   void draw() {
     fill(ballCol);
@@ -59,10 +59,10 @@ class Ball {
   
   void bounce() {
     if (x < 0+(dia/2) || x > displayWidth-(dia/2)) {
-      xSpeed *=  xDir;
+      xSpeed *=  -1;
     }
     if(y < 0+(dia/2) || y > displayHeight-(dia/2)) {
-      ySpeed *= yDir;
+      ySpeed *= -1;
     }
   }//end ballBounce
 }//end Ball
