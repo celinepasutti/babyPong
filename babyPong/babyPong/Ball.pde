@@ -16,14 +16,14 @@ class Ball {
     int referentMeasure = (displayWidth < displayHeight) ? displayWidth: displayHeight; //review ternary operator
     
     //object vars
-    x = startx;
-    y = starty;
-    dia = referentMeasure*1/20;
-    ballCol = color (random(0, 255), random(0, 255), random(0, 255)); //random(255) also applicable. Casting from float to int.
-    xSpeed = 3*xSpeedChange();
-    ySpeed = 3*ySpeedChange();
-    xSpeedChange = 1;
-    ySpeedChange = 1;
+    this.x = startx;
+    this.y = starty;
+    this.dia = referentMeasure*1/20;
+    this.ballCol = color (random(0, 255), random(0, 255), random(0, 255)); //random(255) also applicable. Casting from float to int.
+    this.xSpeed = 3*xSpeedChange();
+    this.ySpeed = 3*ySpeedChange();
+    this.xSpeedChange = 1;
+    this.ySpeedChange = 1;
   } //end constructor
   
   float xSpeedChange() {
