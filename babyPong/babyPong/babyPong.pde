@@ -28,4 +28,6 @@ void keyPressed() {
 void mousePressed() {
 }//endMousePressed
 
+void ballCollisions() {
+}//end ballCollisions
 //endDRIVER
