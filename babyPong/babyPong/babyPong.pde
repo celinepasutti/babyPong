@@ -15,6 +15,8 @@ void setup() {
 void draw() {
   background(tableColor); //day and night mode? ERROR: known in CLASS! NOT DRIVER!!!!!!11!!1
   myBall.draw();
+  
+  //println(myBall.xDir, myBall.yDir);
 }//endDraw
 
 void keyPressed() {
