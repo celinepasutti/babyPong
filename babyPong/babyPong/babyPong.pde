@@ -1,6 +1,6 @@
 //Global Vars and objects
 Ball myBall; //both halves of the constructor.
-Ball[] fireworks = new Firework[25];
+Ball[] fireworks = new Ball[25];
 color tableColor = 150; //ERROR - move to table CLASSSSS!!!!!!! NOWWWW!!!!!! >:(
 
 void setup() {
@@ -27,7 +27,7 @@ void keyPressed() {
 
 void mousePressed() {
   for (int i = 0; i < fireworks.length; i++) {
-    fireworks[i] = new Firework();
+    fireworks[i] = new Ball(0.5);
   }
 }//endMousePressed
 

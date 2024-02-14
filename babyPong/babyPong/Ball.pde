@@ -6,7 +6,7 @@ class Ball {
   color ballCol;
   float xSpeed, ySpeed;
   float xSpeedChange, ySpeedChange;
-  float gravity;
+  float gravity = 0.0;
   //static int count = 25
   
   
@@ -28,8 +28,8 @@ class Ball {
     this.ySpeedChange = 1;
   } //end ball constructor
   
-  //firework constructor
-  Firework() {
+  //firework constructor - multiple constructors by identifying different parameters.
+  Ball(float gravityParameter) {
     //Ball(); //placeholder
     x = mouseX; //ERROR: triffer when the ball enters the goal.
     y = mouseY;
@@ -37,7 +37,7 @@ class Ball {
     dia = random(displayWidth*1/25);
     xSpeed = random(-5, 5);
     ySpeed = random(-5, 5);
-    gravity = 0.5;
+    gravity = gravityParameter;
   }//end firework constructor 
   
   float xSpeedChange() {
@@ -67,6 +67,7 @@ class Ball {
   
   void step() {
     bounce();
+    ySpeed += gravity;
     x += xSpeed;
     y += ySpeed;
   }//endBallStep
