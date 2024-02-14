@@ -6,9 +6,11 @@ class Ball {
   color ballCol;
   float xSpeed, ySpeed;
   float xSpeedChange, ySpeedChange;
+  float gravity;
+  //static int count = 25
   
   
-  //constructor
+  //ball constructor
   Ball () {
     //local vars
     int startx = displayWidth*1/2;
@@ -24,7 +26,19 @@ class Ball {
     this.ySpeed = 3*ySpeedChange();
     this.xSpeedChange = 1;
     this.ySpeedChange = 1;
-  } //end constructor
+  } //end ball constructor
+  
+  //firework constructor
+  Firework() {
+    //Ball(); //placeholder
+    x = mouseX; //ERROR: triffer when the ball enters the goal.
+    y = mouseY;
+    ballCol =  color (random(0, 255), random(0, 255), random(0, 255));
+    dia = random(displayWidth*1/25);
+    xSpeed = random(-5, 5);
+    ySpeed = random(-5, 5);
+    gravity = 0.5;
+  }//end firework constructor 
   
   float xSpeedChange() {
     float xSpeedChange = int (random(-2, 2));
