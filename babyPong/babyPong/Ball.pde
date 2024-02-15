@@ -33,12 +33,26 @@ class Ball {
     //Ball(); //placeholder
     this.x = xParameter; //ERROR: trigger when the Ball enters goal area
     this.y = yParameter; //ERROR: trigger when the Ball enters goal area
-    this.ballCol = color ( random(0, 255), random(255), random(255) ) ; //random(), random()-shortcut, casting from float to intin color var
+    this.ballCol = color (random(0, 255), random(255), random(255)) ; //random(), random()-shortcut, casting from float to intin color var
     this.dia = random(width*1/50); //returns unseen diamters
     this.xSpeed = random(-5, 5); //Can return 0
     this.ySpeed = random(-5, 5); //Can return 0
     gravity = gravityParameter;
   }//end firework constructor 
+  
+  //movedBall constructor -- must look like old ball instance ( same color, same size ) and make old ball instance disappear.
+  Ball(float xParameter, float yParameter, float diaParameter, float colParameter, ) {
+    this.x = xParameter;
+    this.y = yParameter;
+    this.dia = diaParameter;
+    this.ballCol = colParameter;
+    
+    //old ball instance = new ball instance.
+    this.xSpeed = 3*xSpeedChange();
+    this.ySpeed = 3*ySpeedChange();
+    this.xSpeedChange = 1.0; //break bounce physics - change speed
+    this.ySpeedChange = 1.0;
+  }//end movedBall constructor
   
   float xSpeedChange() {
     float xSpeedChange = int (random(-2, 2));

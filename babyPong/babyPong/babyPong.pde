@@ -1,6 +1,8 @@
 //Global Vars and objects
 Ball myBall; //both halves of the constructor.
 Ball[] fireworks = new Ball[25];
+Ball movedBall;
+
 color tableColor = 150; //ERROR - move to table CLASSSSS!!!!!!! NOWWWW!!!!!! >:(
 
 void setup() {
@@ -11,8 +13,9 @@ void setup() {
   //population
   myBall = new Ball(); //both halves of the constructor.
     for (int i = 0; i < fireworks.length; i++) {
-    fireworks[i] = new Ball(displayWidth*-1, displayHeight*-1, 0.5);
+    fireworks[i] = new Ball(displayWidth * -1, displayHeight * -1, 0.5);
   }
+  movedBall = new Ball(displayWidth * -1, displayHeight * -1);
 }//endSetup
 
 
@@ -23,8 +26,8 @@ void draw() {
   myBall.draw();
   for (int i = 0; i < fireworks.length; i++) {
     fireworks[i].draw();
+    movedBall.draw();
   }
-  //println(fireworks[0].y);
 }//endDraw
 
 void keyPressed() {
@@ -34,6 +37,7 @@ void mousePressed() {
   for (int i = 0; i < fireworks.length; i++) {
     fireworks[i] = new Ball(mouseX, mouseY, 0.5);
   }
+  movedBall = new Ball(mouseX, mouseY, myBall.dia, myBall.ballCol);
 }//endMousePressed
 
 void ballCollisions() {
