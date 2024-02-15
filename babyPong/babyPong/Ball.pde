@@ -5,7 +5,7 @@ class Ball {
   float x, y, dia;
   color ballCol;
   float xSpeed, ySpeed;
-  float xSpeedChange, ySpeedChange;
+  float xSpeedChange = 1.0, ySpeedChange = 1.0;
   float gravity = 0.0;
   //static int count = 25
   
@@ -24,19 +24,19 @@ class Ball {
     this.ballCol = color (random(0, 255), random(0, 255), random(0, 255)); //random(255) also applicable. Casting from float to int.
     this.xSpeed = 3*xSpeedChange();
     this.ySpeed = 3*ySpeedChange();
-    this.xSpeedChange = 1;
-    this.ySpeedChange = 1;
+    this.xSpeedChange = 1.0; //break bounce physics - change speed
+    this.ySpeedChange = 1.0;
   } //end ball constructor
   
   //firework constructor - multiple constructors by identifying different parameters.
-  Ball(float gravityParameter) {
+  Ball(float xParameter, float yParameter, float gravityParameter) {
     //Ball(); //placeholder
-    x = mouseX; //ERROR: triffer when the ball enters the goal.
-    y = mouseY;
-    ballCol =  color (random(0, 255), random(0, 255), random(0, 255));
-    dia = random(displayWidth*1/25);
-    xSpeed = random(-5, 5);
-    ySpeed = random(-5, 5);
+    this.x = xParameter; //ERROR: trigger when the Ball enters goal area
+    this.y = yParameter; //ERROR: trigger when the Ball enters goal area
+    this.ballCol = color ( random(0, 255), random(255), random(255) ) ; //random(), random()-shortcut, casting from float to intin color var
+    this.dia = random(width*1/50); //returns unseen diamters
+    this.xSpeed = random(-5, 5); //Can return 0
+    this.ySpeed = random(-5, 5); //Can return 0
     gravity = gravityParameter;
   }//end firework constructor 
   
@@ -61,15 +61,14 @@ class Ball {
     ellipse(x, y, dia, dia); //easter egg at bounce - diameter will change to create the effect of a "squish".
     fill(0);
     
-    
-    step();
+    step(); //manipulating the variables.
   }//endBallDraw
   
   void step() {
     bounce();
-    ySpeed += gravity;
-    x += xSpeed;
-    y += ySpeed;
+    ySpeed += gravity; //Ball() is not affected - thus, the pong ball has no gravity.
+    x += xSpeed * xSpeedChange;
+    y += ySpeed * ySpeedChange;
   }//endBallStep
   
   void bounce() {

@@ -10,16 +10,21 @@ void setup() {
   */
   //population
   myBall = new Ball(); //both halves of the constructor.
+    for (int i = 0; i < fireworks.length; i++) {
+    fireworks[i] = new Ball(displayWidth*-1, displayHeight*-1, 0.5);
+  }
 }//endSetup
 
 
 void draw() {
   background(tableColor); //day and night mode? ERROR - known in CLASS! NOT DRIVER!!!!!!11!!1
+  
+  //println(myBall.xDir, myBall.yDir);
   myBall.draw();
   for (int i = 0; i < fireworks.length; i++) {
     fireworks[i].draw();
   }
-  //println(myBall.xDir, myBall.yDir);
+  //println(fireworks[0].y);
 }//endDraw
 
 void keyPressed() {
@@ -27,7 +32,7 @@ void keyPressed() {
 
 void mousePressed() {
   for (int i = 0; i < fireworks.length; i++) {
-    fireworks[i] = new Ball(0.5);
+    fireworks[i] = new Ball(mouseX, mouseY, 0.5);
   }
 }//endMousePressed
 
