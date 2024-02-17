@@ -7,6 +7,7 @@ class Ball {
   float xSpeed, ySpeed;
   float xSpeedChange = 1.0, ySpeedChange = 1.0;
   float gravity = 0.0;
+  boolean disappear = false;
   //static int count = 25
   
   
@@ -41,17 +42,17 @@ class Ball {
   }//end firework constructor 
   
   //movedBall constructor -- must look like old ball instance ( same color, same size ) and make old ball instance disappear.
-  Ball(float xParameter, float yParameter, float diaParameter, float colParameter, ) {
+  Ball(float xParameter, float yParameter, float diaParameter, color colParameter, float xSpeedParameter, float ySpeedParameter, float xSpeedChangeParameter, float ySpeedChangeParameter) {
     this.x = xParameter;
     this.y = yParameter;
     this.dia = diaParameter;
     this.ballCol = colParameter;
+    this.xSpeed = xSpeedParameter;
+    this.ySpeed = ySpeedParameter;
+    this.xSpeedChange = xSpeedChangeParameter;
+    this.ySpeedChange = ySpeedChangeParameter;
     
     //old ball instance = new ball instance.
-    this.xSpeed = 3*xSpeedChange();
-    this.ySpeed = 3*ySpeedChange();
-    this.xSpeedChange = 1.0; //break bounce physics - change speed
-    this.ySpeedChange = 1.0;
   }//end movedBall constructor
   
   float xSpeedChange() {
