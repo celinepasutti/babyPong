@@ -2,11 +2,14 @@
 Ball myBall; //both halves of the constructor.
 Ball[] fireworks = new Ball[25];
 Ball movedBall;
+color black=#000000, white=#FFFFFF, red=#951111, Lgreen=#27C149, gray=#CBCBCB;
+//Button exit;
 
 color tableColor = 150; //ERROR - move to table CLASSSSS!!!!!!! NOWWWW!!!!!! >:(
 
 void setup() {
-  fullScreen();
+  fullScreen();  
+  //font = createFont("Roboto", 55);
   /*screenSizeChecker(); for landscape, portrait, square views.
   Updated automatically for screen rotation on android.
   */
@@ -16,6 +19,7 @@ void setup() {
     fireworks[i] = new Ball(displayWidth * -1, displayHeight * -1, 0.5);
   }
   movedBall = new Ball(displayWidth * -1, displayHeight * -1, myBall.dia, myBall.ballCol, myBall.xSpeed, myBall.ySpeed, myBall.xSpeedChange, myBall.ySpeedChange);
+  //exit = new Button();
 }//endSetup
 
 
@@ -30,6 +34,7 @@ void draw() {
     fireworks[i].draw();
   }
   movedBall.draw();
+  //exit.draw();
 }//endDraw
 
 void keyPressed() {
@@ -40,6 +45,7 @@ void mousePressed() {
     fireworks[i] = new Ball(mouseX, mouseY, 0.5);
   }
   movedBall = new Ball(mouseX, mouseY, myBall.dia, myBall.ballCol, myBall.xSpeed, myBall.ySpeed, myBall.xSpeedChange, myBall.ySpeedChange);
+  myBall.disappear = true;
 }//endMousePressed
 
 //endDRIVER
