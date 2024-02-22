@@ -3,7 +3,7 @@ Ball myBall; //both halves of the constructor.
 Ball[] fireworks = new Ball[25];
 Ball movedBall;
 color black=#000000, white=#FFFFFF, red=#951111, Lgreen=#27C149, gray=#CBCBCB;
-//Button exit;
+Button exit;
 
 color tableColor = 150; //ERROR - move to table CLASSSSS!!!!!!! NOWWWW!!!!!! >:(
 
@@ -19,7 +19,7 @@ void setup() {
     fireworks[i] = new Ball(displayWidth * -1, displayHeight * -1, 0.5);
   }
   movedBall = new Ball(displayWidth * -1, displayHeight * -1, myBall.dia, myBall.ballCol, myBall.xSpeed, myBall.ySpeed, myBall.xSpeedChange, myBall.ySpeedChange);
-  //exit = new Button(red);
+  exit = new Button(red);
 }//endSetup
 
 
@@ -34,7 +34,7 @@ void draw() {
     fireworks[i].draw();
   }
   movedBall.draw();
-  //exit.draw();
+  exit.draw();
 }//endDraw
 
 void keyPressed() {
@@ -46,6 +46,10 @@ void mousePressed() {
   }
   movedBall = new Ball(mouseX, mouseY, myBall.dia, myBall.ballCol, myBall.xSpeed, myBall.ySpeed, myBall.xSpeedChange, myBall.ySpeedChange);
   myBall.disappear = true;
+  
+  if (mouseX>=exit.x && mouseX<=exit.x+exit.w && mouseY>=exit.y && mouseY<=exit.y+exit.h) {
+    exit();
+  }
 }//endMousePressed
 
 //endDRIVER

@@ -15,7 +15,6 @@ class Button {
   void draw() {
     if(mouseX>=x && mouseX<=x+w && mouseY>=y && mouseY<=y+h) {
     noStroke();
-    butCol = Button.butColParameter;
     fill (butCol);
     rect(x, y, w, h);
     fill (0);
@@ -23,7 +22,7 @@ class Button {
     
   } else {
     noStroke();
-    fill (butCol);
+    fill (gray);
     rect(x, y, w, h);
     fill (0);
   }
