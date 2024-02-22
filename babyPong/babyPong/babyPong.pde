@@ -30,6 +30,10 @@ void setup() {
 
 void draw() {
   background(tableColor); //day and night mode? ERROR - known in CLASS! NOT DRIVER!!!!!!11!!1
+  for (int i = 0; i < fireworks.length; i++) {
+    fireworks[i].draw();
+  }
+  
   if (myBall.disappear == true) {
     //empty IF
   } else {
@@ -38,17 +42,13 @@ void draw() {
   
   //ERROR - ball instance still bounces.
   
-  if(myBall.x < (myBall.dia * 2) || myBall.x > ( displayWidth - (myBall.dia * 2)) || movedBall.x < (movedBall.dia * 2) || movedBall.x > ( displayWidth - (movedBall.dia * 2))) { //goal - firework execution is based on x value. triggers are left goal and right goal.
+  if(myBall.x < myBall.dia || myBall.x > ( displayWidth - myBall.dia)) { //goal - firework execution is based on x value. triggers are left goal and right goal.
     if(myBall.disappear == false) {
       myBall.netExplosion(myBall.x, myBall.y);
-    } else /*if(myBall.disappear == true)*/ {
+    }
+  } else if (myBall.disappear == true && movedBall.x < movedBall.dia || movedBall.x > ( displayWidth - movedBall.dia)) {
       movedBall.netExplosion(movedBall.x, movedBall.y);
     }
-  }
-  
-  for (int i = 0; i < fireworks.length; i++) {
-    fireworks[i].draw();
-  }
   movedBall.draw();
   //exit.draw();
 }//endDraw
