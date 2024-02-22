@@ -35,7 +35,7 @@ class Ball {
     this.x = xParameter; //ERROR: trigger when the Ball enters goal area
     this.y = yParameter; //ERROR: trigger when the Ball enters goal area
     this.ballCol = color (random(0, 255), random(255), random(255)) ; //random(), random()-shortcut, casting from float to intin color var
-    this.dia = random(width*1/50); //returns unseen diamters
+    this.dia = random(width*1/70); //returns unseen diamters
     this.xSpeed = random(-5, 5); //Can return 0
     this.ySpeed = random(-5, 5); //Can return 0
     gravity = gravityParameter;
@@ -94,6 +94,12 @@ class Ball {
       ySpeed *= -1;
     }
   }//end ballBounce
+  
+  void netExplosion(float xParameter, float yParameter) {
+  for (int i = 0; i < fireworks.length; i++) {
+      fireworks[i] = new Ball(xParameter, yParameter, 0.5);
+    }
+  }//end netExplosion
 }//end Ball
 
   

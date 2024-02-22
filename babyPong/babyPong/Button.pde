@@ -3,11 +3,11 @@ class Button {
   color butCol = gray;
   int referentMeasure = (displayWidth < displayHeight) ? displayWidth: displayHeight;
   
-  Button(color butColParameter) {
-    this.x = /*quitButtonXParameter =*/ referentMeasure*1.72;
-    this.y = /*quitButtonYParameter =*/ referentMeasure*0;
-    this.w = /*quitButtonWParameter =*/ referentMeasure*1.2/20;
-    this.h = /*quitButtonHParameter =*/ referentMeasure*1/20;
+  Button(color butColParameter, float butXParameter, float butYParameter, float butWParameter, float butHParameter) {
+    this.x = butXParameter;
+    this.y = butYParameter;
+    this.w = butWParameter;
+    this.h = butHParameter;
     this.butCol = butColParameter;
     
   }
@@ -22,9 +22,9 @@ class Button {
     
   } else {
     noStroke();
-    fill (gray);
+    fill (tableColor);
     rect(x, y, w, h);
     fill (0);
+    }
   }
- }
 }
