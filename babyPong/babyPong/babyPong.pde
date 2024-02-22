@@ -19,7 +19,7 @@ void setup() {
     fireworks[i] = new Ball(displayWidth * -1, displayHeight * -1, 0.5);
   }
   movedBall = new Ball(displayWidth * -1, displayHeight * -1, myBall.dia, myBall.ballCol, myBall.xSpeed, myBall.ySpeed, myBall.xSpeedChange, myBall.ySpeedChange);
-  //exit = new Button();
+  //exit = new Button(red);
 }//endSetup
 
 
