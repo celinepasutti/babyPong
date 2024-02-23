@@ -24,7 +24,7 @@ void setup() {
     fireworks[i] = new Ball(displayWidth * -1, displayHeight * -1, 0.5);
   }
   movedBall = new Ball(displayWidth * -1, displayHeight * -1, myBall.dia, myBall.ballCol, myBall.xSpeed, myBall.ySpeed, myBall.xSpeedChange, myBall.ySpeedChange);
-  //exit = new Button(red, referentMeasure*1.72, referentMeasure*0, referentMeasure*1.2/20, referentMeasure*1/20);
+  exit = new Button(red, displayWidth*19/20, displayHeight*0, displayWidth*1/20, displayHeight*1/25);
 }//endSetup
 
 
@@ -42,15 +42,13 @@ void draw() {
   
   //ERROR - ball instance still bounces.
   
-  if(myBall.x < myBall.dia || myBall.x > ( displayWidth - myBall.dia)) { //goal - firework execution is based on x value. triggers are left goal and right goal.
-    if(myBall.disappear == false) {
+  if(myBall.x < myBall.dia || myBall.x > ( displayWidth - myBall.dia) && myBall.disappear == false ) { //goal - firework execution is based on x value. triggers are left goal and right goal.
       myBall.netExplosion(myBall.x, myBall.y);
-    }
   } else if (myBall.disappear == true && movedBall.x < movedBall.dia || movedBall.x > ( displayWidth - movedBall.dia)) {
       movedBall.netExplosion(movedBall.x, movedBall.y);
     }
   movedBall.draw();
-  //exit.draw();
+  exit.draw();
 }//endDraw
 
 void keyPressed() {
@@ -60,9 +58,9 @@ void mousePressed() {
   movedBall = new Ball(mouseX, mouseY, myBall.dia, myBall.ballCol, myBall.xSpeed, myBall.ySpeed, myBall.xSpeedChange, myBall.ySpeedChange);
   myBall.disappear = true;
   
-  /*if (mouseX>=exit.x && mouseX<=exit.x+exit.w && mouseY>=exit.y && mouseY<=exit.y+exit.h) {
+  if (mouseX>=exit.x && mouseX<=exit.x+exit.w && mouseY>=exit.y && mouseY<=exit.y+exit.h) {
     exit();
-  }*/
+  }
 }//endMousePressed
 
 //endDRIVER
