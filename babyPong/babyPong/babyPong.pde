@@ -43,9 +43,9 @@ void draw() {
   //ERROR - ball instance still bounces.
   
   if(myBall.x < myBall.dia || myBall.x > ( displayWidth - myBall.dia) && myBall.disappear == false ) { //goal - firework execution is based on x value. triggers are left goal and right goal.
-      myBall.netExplosion(myBall.x, myBall.y);
+      myBall.netExplosion(myBall.x, myBall.y, 0.5);
   } else if (myBall.disappear == true && movedBall.x < movedBall.dia || movedBall.x > ( displayWidth - movedBall.dia)) {
-      movedBall.netExplosion(movedBall.x, movedBall.y);
+      movedBall.netExplosion(movedBall.x, movedBall.y, 0.5);
     }
   movedBall.draw();
   exit.draw();

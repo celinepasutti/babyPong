@@ -95,9 +95,9 @@ class Ball {
     }
   }//end ballBounce
   
-  void netExplosion(float xParameter, float yParameter) {
+  void netExplosion(float xParameter, float yParameter, float gravityParameter) {
   for (int i = 0; i < fireworks.length; i++) {
-      fireworks[i] = new Ball(xParameter, yParameter, 0.5);
+      fireworks[i] = new Ball(xParameter, yParameter, gravityParameter);
     }
   }//end netExplosion
 }//end Ball
