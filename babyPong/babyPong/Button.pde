@@ -1,7 +1,6 @@
 class Button {
   float x, y, w, h;
   color butCol = gray;
-  int referentMeasure = (displayWidth < displayHeight) ? displayWidth: displayHeight;
   
   Button(color butColParameter, float butXParameter, float butYParameter, float butWParameter, float butHParameter) {
     this.x = butXParameter;

@@ -2,13 +2,13 @@
 
 //KNOWN BUG = BALL WILL PHASE THROUGH EXIT BUTTON.
 
-Ball myBall; //both halves of the constructor.
+Ball myBall, movedBall; //both halves of the constructor.
 Ball[] fireworks = new Ball[25];
-Ball movedBall;
+Paddle lPaddle, rPaddle;
 
 color black=#000000, white=#FFFFFF, red=#951111, Lgreen=#27C149, gray=#CBCBCB;
 
-Button exit;
+//Button exit;
 
 color tableColor = 150; //ERROR - move to table CLASSSSS!!!!!!! NOWWWW!!!!!! >:(
 
@@ -24,11 +24,15 @@ void setup() {
     fireworks[i] = new Ball(displayWidth * -1, displayHeight * -1, 0.5);
   }
   movedBall = new Ball(displayWidth * -1, displayHeight * -1, myBall.dia, myBall.ballCol, myBall.xSpeed, myBall.ySpeed, myBall.xSpeedChange, myBall.ySpeedChange);
-  exit = new Button(red, displayWidth*19/20, displayHeight*0, displayWidth*1/20, displayHeight*1/25);
+  //exit = new Button(red, displayWidth*19/20, displayHeight*0, displayWidth*1/20, displayHeight*1/25);
+  
+  rPaddle = new Paddle(0);
+  lPaddle - new Paddle(displayWidth);
 }//endSetup
 
 
 void draw() {
+  seizureMode();
   background(tableColor); //day and night mode? ERROR - known in CLASS! NOT DRIVER!!!!!!11!!1
   for (int i = 0; i < fireworks.length; i++) {
     fireworks[i].draw();
@@ -48,10 +52,18 @@ void draw() {
       movedBall.netExplosion(movedBall.x, movedBall.y, 0.5);
     }
   movedBall.draw();
-  exit.draw();
+  //exit.draw();
 }//endDraw
 
 void keyPressed() {
+  if (key == 'p' || key == 'P') {
+    if (seizureMode == false) {
+      seizureMode = true;
+      println(seizureMode);
+    } else {
+      seizureMode = false;
+    }
+  }
 }//endKeyPressed
 
 void mousePressed() {
