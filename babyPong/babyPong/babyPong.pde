@@ -4,6 +4,7 @@
 
 Ball myBall, movedBall; //both halves of the constructor.
 Ball[] fireworks = new Ball[25];
+Confetti[] confettis = new Confetti[500];
 Paddle lPaddle, rPaddle;
 
 color black=#000000, white=#FFFFFF, red=#951111, Lgreen=#27C149, gray=#CBCBCB;
@@ -13,7 +14,9 @@ color black=#000000, white=#FFFFFF, red=#951111, Lgreen=#27C149, gray=#CBCBCB;
 color tableColor = 150; //ERROR - move to table CLASSSSS!!!!!!! NOWWWW!!!!!! >:(
 
 void setup() {
+  noStroke();
   fullScreen();  
+  createConfetti();
   //font = createFont("Roboto", 55);
   /*screenSizeChecker(); for landscape, portrait, square views.
   Updated automatically for screen rotation on android.
@@ -22,18 +25,17 @@ void setup() {
   myBall = new Ball(); //both halves of the constructor.
     for (int i = 0; i < fireworks.length; i++) {
     fireworks[i] = new Ball(displayWidth * -1, displayHeight * -1, 0.5);
-  }
+    }
   movedBall = new Ball(displayWidth * -1, displayHeight * -1, myBall.dia, myBall.ballCol, myBall.xSpeed, myBall.ySpeed, myBall.xSpeedChange, myBall.ySpeedChange);
   //exit = new Button(red, displayWidth*19/20, displayHeight*0, displayWidth*1/20, displayHeight*1/25);
   
-  rPaddle = new Paddle(0);
-  lPaddle - new Paddle(displayWidth);
+  //rPaddle = new Paddle(0);
+  //lPaddle - new Paddle(displayWidth);
 }//endSetup
 
-
 void draw() {
-  seizureMode();
   background(tableColor); //day and night mode? ERROR - known in CLASS! NOT DRIVER!!!!!!11!!1
+  partyMode();
   for (int i = 0; i < fireworks.length; i++) {
     fireworks[i].draw();
   }
@@ -57,22 +59,28 @@ void draw() {
 
 void keyPressed() {
   if (key == 'p' || key == 'P') {
-    if (seizureMode == false) {
-      seizureMode = true;
-      println(seizureMode);
+    if (partyMode == false) {
+      partyMode = true;
+      println(partyMode);
     } else {
-      seizureMode = false;
+      partyMode = false;
+      tableColor = 150;
     }
   }
 }//endKeyPressed
 
 void mousePressed() {
+  if (myBall.disappear == false) {
   movedBall = new Ball(mouseX, mouseY, myBall.dia, myBall.ballCol, myBall.xSpeed, myBall.ySpeed, myBall.xSpeedChange, myBall.ySpeedChange);
   myBall.disappear = true;
-  
-  if (mouseX>=exit.x && mouseX<=exit.x+exit.w && mouseY>=exit.y && mouseY<=exit.y+exit.h) {
-    exit();
+  } else {
+  movedBall = new Ball(mouseX, mouseY, myBall.dia, myBall.ballCol, movedBall.xSpeed, movedBall.ySpeed, movedBall.xSpeedChange, movedBall.ySpeedChange);
+  myBall.disappear = true;
   }
+  
+ /* if (mouseX>=exit.x && mouseX<=exit.x+exit.w && mouseY>=exit.y && mouseY<=exit.y+exit.h) {
+    exit();
+  }*/
 }//endMousePressed
 
 //endDRIVER

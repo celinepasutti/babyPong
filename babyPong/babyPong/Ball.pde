@@ -34,11 +34,11 @@ class Ball {
     //Ball(); //placeholder
     this.x = xParameter; //ERROR: trigger when the Ball enters goal area
     this.y = yParameter; //ERROR: trigger when the Ball enters goal area
-    this.ballCol = color (random(0, 255), random(255), random(255)) ; //random(), random()-shortcut, casting from float to intin color var
+    this.ballCol = color (random(255), random(255), random(255)) ; //random(), random()-shortcut, casting from float to intin color var
     this.dia = random(width*1/70); //returns unseen diamters
     this.xSpeed = random(-5, 5); //Can return 0
     this.ySpeed = random(-5, 5); //Can return 0
-    gravity = gravityParameter;
+    this.gravity = gravityParameter;
   }//end firework constructor 
   
   //movedBall constructor -- must look like old ball instance ( same color, same size ) and make old ball instance disappear.
@@ -73,7 +73,7 @@ class Ball {
   
   void draw() {
     fill(ballCol);
-    ellipse(x, y, dia, dia); //easter egg at bounce - diameter will change to create the effect of a "squish".
+    ellipse(x, y, dia, dia); //easter egg at bounce - dia will change to create the effect of a "squish".
     fill(0);
     
     step(); //manipulating the variables.

@@ -6,12 +6,14 @@ class Paddle {
  color paddleCol;
  
  Paddle (float paddleStartParameter) {
-   
+  /* 
    paddleX = netX + netW;
    paddleY = 
    paddleW = 
    paddleH = 
    paddleCol = 
+   
+   */
  }
  
  void draw() {
