@@ -33,7 +33,7 @@ class Confetti {
  
  void step() {
    y += 3;
-   while (y == displayHeight) {
+   if (y > displayHeight) {
     y = 0; 
    }
   }
