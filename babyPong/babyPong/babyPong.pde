@@ -1,7 +1,7 @@
 //Global Vars and objects
 
 Ball myBall, movedBall;
-Ball[] fireworks = new Ball[25];
+Ball[] fireworks = new Ball[30];
 Confetti[] confettis = new Confetti[500];
 Paddle lPaddle, rPaddle;
 
@@ -69,16 +69,20 @@ void keyPressed() {
   }
   
   if (key == 'w' || key == 'W') {
-    rPaddle.movePaddleUp();
+    rPaddle.down = false;
+    rPaddle.up = true;
   }
   if ( key == 's' || key == 'S') {
-    rPaddle.movePaddleDown();
+    rPaddle.up = false;
+    rPaddle.down = true;
   }
   if (key == CODED && keyCode == UP) {
-    lPaddle.movePaddleUp();
+    lPaddle.down = false;
+    lPaddle.up = true;
   }
   if (key == CODED && keyCode == DOWN) {
-    lPaddle.movePaddleDown();
+    lPaddle.up = false;
+    lPaddle.down = true;
   }
 }
 

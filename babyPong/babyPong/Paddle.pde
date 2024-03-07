@@ -1,3 +1,6 @@
+//global vars
+//// keyPressed --> draw(); encapsulate later on.
+
 class Paddle {
  //class vars
  float tableX, tableY, tableW, tableH;
@@ -5,6 +8,7 @@ class Paddle {
  float paddleX, paddleY, paddleW, paddleH, paddleHeightRef;
  float paddleSpeed;
  color paddleCol;
+ Boolean up = false, down = false;
  
  Paddle (float paddleStartParameter, float ballDiaParameter) {
    netW = ballDiaParameter*2;
@@ -26,19 +30,32 @@ class Paddle {
    this.paddleY = tableY + (tableH*1/2) - (paddleH*1/2);
    this.paddleCol = 255;
    this.paddleSpeed = 9;
+   this.up = false;
+   this.down = false;
  }
  
  void draw() {
   fill (paddleCol);
-  rect(paddleX, paddleY, paddleW, paddleH);
+  paddles();
   fill(0);
  }//end draw
+ 
+ void paddles() {
+  rect(paddleX, paddleY, paddleW, paddleH);
+  if (up == true) {
+   movePaddleUp(); 
+  }
+  if (down == true) {
+   movePaddleDown(); 
+  }
+ }
  
  void movePaddleUp() {
   paddleY -= paddleSpeed; 
   if (paddleY < tableY) { //error catch
     paddleY = tableY;
   }
+  up = false;
  }
  
   void movePaddleDown() {
@@ -46,6 +63,7 @@ class Paddle {
   if ((paddleY + paddleH) > (tableY + tableH)) {
     paddleY = ((tableY + tableH) - paddleH);
   }
+  down = false;
  }
  
 }// end class
