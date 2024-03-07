@@ -20,7 +20,7 @@ class Confetti {
    this.x = xParameter;
    this.y = yParameter;
    this.wh = whParameter;
-   this.confettiCol = color (random(255), random(255), random(255));
+   this.confettiCol = color (int(random(255)), int(random(255)), int(random(255)));
    
  }
  

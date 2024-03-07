@@ -29,16 +29,20 @@ void setup() {
   movedBall = new Ball(displayWidth * -1, displayHeight * -1, myBall.dia, myBall.ballCol, myBall.xSpeed, myBall.ySpeed, myBall.xSpeedChange, myBall.ySpeedChange);
   //exit = new Button(red, displayWidth*19/20, displayHeight*0, displayWidth*1/20, displayHeight*1/25);
 
-  //rPaddle = new Paddle(0);
-  //lPaddle - new Paddle(displayWidth);
+  rPaddle = new Paddle(0, myBall.dia);
+  lPaddle = new Paddle(displayWidth, myBall.dia);
 }//endSetup
 
 void draw() {
   background(tableColor); //day and night mode? ERROR - known in CLASS! NOT DRIVER!!!!!!11!!1
   partyMode();
+  
   for (int i = 0; i < fireworks.length; i++) {
     fireworks[i].draw();
   }
+  
+  lPaddle.draw();
+  rPaddle.draw();
 
   if (myBall.disappear == true) {
     //empty IF
