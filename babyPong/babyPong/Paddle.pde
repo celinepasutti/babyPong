@@ -2,15 +2,16 @@ class Paddle {
  //class vars
  float tableX, tableY, tableW, tableH;
  float netX, netY, netW, netH;
- float paddleX, paddleY, paddleW, paddleH;
+ float paddleX, paddleY, paddleW, paddleH, paddleHeightRef;
+ float paddleSpeed;
  color paddleCol;
  
  Paddle (float paddleStartParameter, float ballDiaParameter) {
    netW = ballDiaParameter*2;
    tableH = displayHeight * 8/10;
-   tableY = displayHeight*1/10;
+   tableY = displayHeight * 1/10;
    paddleW = ballDiaParameter*1/2;
-   paddleH = tableH*1/4;
+   paddleHeightRef = 0.25;
    if (paddleStartParameter ==  0) {
      netX = paddleStartParameter;
    }
@@ -21,10 +22,10 @@ class Paddle {
    if (paddleStartParameter == displayWidth) {
      netX = paddleStartParameter - (netW*2 + paddleW);
    }
+   this.paddleH = tableH * paddleHeightRef;
    this.paddleY = tableY + (tableH*1/2) - (paddleH*1/2);
    this.paddleCol = 255;
-   
-   
+   this.paddleSpeed = 9;
  }
  
  void draw() {
@@ -33,11 +34,18 @@ class Paddle {
   fill(0);
  }//end draw
  
- void movePaddleDown() {
-  paddleY += paddleTravelSpeed; //DOWN
+ void movePaddleUp() {
+  paddleY -= paddleSpeed; 
+  if (paddleY < tableY) { //error catch
+    paddleY = tableY;
+  }
  }
  
- void movePaddleUp() {
-  paddleY -= paddleTravelSpeed; 
+  void movePaddleDown() {
+  paddleY += paddleSpeed; //DOWN
+  if ((paddleY + paddleH) > (tableY + tableH)) {
+    paddleY = ((tableY + tableH) - paddleH);
+  }
  }
+ 
 }// end class

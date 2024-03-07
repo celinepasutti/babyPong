@@ -1,8 +1,6 @@
 //Global Vars and objects
 
-//KNOWN BUG = BALL WILL PHASE THROUGH EXIT BUTTON.
-
-Ball myBall, movedBall; //both halves of the constructor.
+Ball myBall, movedBall;
 Ball[] fireworks = new Ball[25];
 Confetti[] confettis = new Confetti[500];
 Paddle lPaddle, rPaddle;
@@ -34,7 +32,7 @@ void setup() {
 }//endSetup
 
 void draw() {
-  background(tableColor); //day and night mode? ERROR - known in CLASS! NOT DRIVER!!!!!!11!!1
+  background(tableColor);
   partyMode();
   
   for (int i = 0; i < fireworks.length; i++) {
@@ -50,8 +48,6 @@ void draw() {
     myBall.draw();
   }
 
-  //ERROR - ball instance still bounces.
-
   if (myBall.x < myBall.dia || myBall.x > ( displayWidth - myBall.dia) && myBall.disappear == false ) { //goal - firework execution is based on x value. triggers are left goal and right goal.
     myBall.netExplosion(myBall.x, myBall.y, 0.5);
   } else if (myBall.disappear == true && movedBall.x < movedBall.dia || movedBall.x > ( displayWidth - movedBall.dia)) {
@@ -59,7 +55,7 @@ void draw() {
   }
   movedBall.draw();
   //exit.draw();
-}//endDraw
+}
 
 void keyPressed() {
   if (key == 'p' || key == 'P') {
@@ -71,7 +67,20 @@ void keyPressed() {
       tableColor = 150;
     }
   }
-}//endKeyPressed
+  
+  if (key == 'w' || key == 'W') {
+    rPaddle.movePaddleUp();
+  }
+  if ( key == 's' || key == 'S') {
+    rPaddle.movePaddleDown();
+  }
+  if (key == CODED && keyCode == UP) {
+    lPaddle.movePaddleUp();
+  }
+  if (key == CODED && keyCode == DOWN) {
+    lPaddle.movePaddleDown();
+  }
+}
 
 void mousePressed() {
   if (myBall.disappear == false) {
@@ -85,6 +94,6 @@ void mousePressed() {
   /* if (mouseX>=exit.x && mouseX<=exit.x+exit.w && mouseY>=exit.y && mouseY<=exit.y+exit.h) {
    exit();
    }*/
-}//endMousePressed
+}
 
 //endDRIVER
