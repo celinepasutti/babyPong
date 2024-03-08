@@ -8,6 +8,7 @@ class Ball {
   float xSpeedChange = 1.0, ySpeedChange = 1.0;
   float gravity = 0.0;
   boolean disappear = false;
+  float tableY;
   //static int count = 25
   
   
@@ -87,10 +88,10 @@ class Ball {
   }//endBallStep
   
   void bounce() {
-    if (x < 0+(dia/2) || x > displayWidth-(dia/2)) {
+    if (x < 0 + (dia/2) || x > displayWidth - (dia/2)) {
       xSpeed *=  -1;
     }
-    if(y < 0+(dia/2) || y > displayHeight-(dia/2)) {
+    if(y < tableY + (dia/2) || y > displayHeight - (dia/2)) {
       ySpeed *= -1;
     }
   }//end ballBounce
@@ -100,6 +101,10 @@ class Ball {
       fireworks[i] = new Ball(xParameter, yParameter, gravityParameter);
     }
   }//end netExplosion
+  
+  void tableYUpdate(float tableYParameter) { //GETTERS AND SETTERS
+    tableY = tableYParameter;
+  }
 }//end Ball
 
   

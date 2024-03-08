@@ -41,6 +41,9 @@ void draw() {
   
   lPaddle.draw();
   rPaddle.draw();
+  
+  myBall.tableYUpdate(rPaddle.tableY);
+  movedBall.tableYUpdate(rPaddle.tableY);
 
   if (myBall.disappear == true) {
     //empty IF
