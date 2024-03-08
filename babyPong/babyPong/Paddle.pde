@@ -55,7 +55,6 @@ class Paddle {
   if (paddleY < tableY) { //error catch
     paddleY = tableY;
   }
-  up = false;
  }
  
   void movePaddleDown() {
@@ -63,7 +62,46 @@ class Paddle {
   if ((paddleY + paddleH) > (tableY + tableH)) {
     paddleY = ((tableY + tableH) - paddleH);
   }
-  down = false;
+ }
+ 
+ void keyPressedWASD() {
+  if (key == 'w' || key == 'W') {
+    down = false;
+    up = true;
+  }
+  if ( key == 's' || key == 'S') {
+    up = false;
+    down = true;
+  }
+ }
+ 
+ void keyPressedARROW() {
+  if (key == CODED && keyCode == UP) {
+    down = false;
+    up = true;
+  }
+  if (key == CODED && keyCode == DOWN) {
+    up = false;
+    down = true;
+  } 
+ }
+ 
+ void keyReleasedWASD() {
+   if (key == 'w' || key == 'W') {
+    up = false;
+  }
+  if (key == 's' || key == 'S') {
+    down = false;
+  }
+ }
+ 
+ void keyReleasedARROW() {
+   if (key == CODED && keyCode == UP) {
+    up = false;
+  }
+  if (key == CODED && keyCode == DOWN) {
+    down = false;
+  }
  }
  
 }// end class

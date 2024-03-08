@@ -48,7 +48,7 @@ void draw() {
     myBall.draw();
   }
 
-  if (myBall.x < myBall.dia || myBall.x > ( displayWidth - myBall.dia) && myBall.disappear == false ) { //goal - firework execution is based on x value. triggers are left goal and right goal.
+  if (myBall.disappear == false  && myBall.x < myBall.dia || myBall.x > ( displayWidth - myBall.dia)) { //goal - firework execution is based on x value. triggers are left goal and right goal.
     myBall.netExplosion(myBall.x, myBall.y, 0.5);
   } else if (myBall.disappear == true && movedBall.x < movedBall.dia || movedBall.x > ( displayWidth - movedBall.dia)) {
     movedBall.netExplosion(movedBall.x, movedBall.y, 0.5);
@@ -68,22 +68,13 @@ void keyPressed() {
     }
   }
   
-  if (key == 'w' || key == 'W') {
-    rPaddle.down = false;
-    rPaddle.up = true;
-  }
-  if ( key == 's' || key == 'S') {
-    rPaddle.up = false;
-    rPaddle.down = true;
-  }
-  if (key == CODED && keyCode == UP) {
-    lPaddle.down = false;
-    lPaddle.up = true;
-  }
-  if (key == CODED && keyCode == DOWN) {
-    lPaddle.up = false;
-    lPaddle.down = true;
-  }
+  rPaddle.keyPressedWASD();
+  lPaddle.keyPressedARROW();
+}
+
+void keyReleased() {
+  rPaddle.keyReleasedWASD();
+  lPaddle.keyReleasedARROW();
 }
 
 void mousePressed() {
