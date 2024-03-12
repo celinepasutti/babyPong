@@ -8,7 +8,7 @@ class Ball {
   float xSpeedChange = 1.0, ySpeedChange = 1.0;
   float gravity = 0.0;
   boolean disappear = false;
-  float tableY;
+  float tableX, tableY, tableW, tableH, paddleX, paddleY, paddleW, paddleH;
   //static int count = 25
   
   
@@ -88,22 +88,38 @@ class Ball {
   }//endBallStep
   
   void bounce() {
+    if ( x < (tableW * 1/2)) {
+      if (x < paddleX + (dia/2) && y > paddleY && y < (paddleY + paddleH)) {
+        xSpeed = -1;
+      }
+    } else {
+      
+    }
+    
+    /*
     if (x < 0 + (dia/2) || x > displayWidth - (dia/2)) {
       xSpeed *=  -1;
     }
     if(y < tableY + (dia/2) || y > displayHeight - (dia/2)) {
       ySpeed *= -1;
-    }
+    }*/
   }//end ballBounce
   
   void netExplosion(float xParameter, float yParameter, float gravityParameter) {
-  for (int i = 0; i < fireworks.length; i++) {
+    for (int i = 0; i < fireworks.length; i++) {
       fireworks[i] = new Ball(xParameter, yParameter, gravityParameter);
     }
   }//end netExplosion
   
-  void tableYUpdate(float tableYParameter) { //GETTERS AND SETTERS
+  void tableUpdate(float tableXParameter, float tableYParameter, float tableWParameter, float tableHParameter, float rPaddleXParameter, float lPaddleXParameter, float rPaddleYParameter, float lPaddleYParameter, float rPaddleWParameter, float lPaddleWParameter, float rPaddleHParameter, float lPaddleHParameter) { //GETTERS AND SETTERS
+    tableX = tableXParameter;
     tableY = tableYParameter;
+    tableW = tableWParameter;
+    tableH = tableHParameter;
+    paddleX = (x < (tableW * 1/2)) ? rPaddleXParameter: lPaddleXParameter;
+    paddleY = (x < (tableW * 1/2)) ? rPaddleYParameter: lPaddleYParameter;
+    paddleW = (x < (tableW * 1/2)) ? rPaddleWParameter: lPaddleWParameter;
+    paddleH = (x < (tableW * 1/2)) ? rPaddleHParameter: lPaddleHParameter;
   }
 }//end Ball
 

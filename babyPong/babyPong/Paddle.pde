@@ -12,6 +12,7 @@ class Paddle {
  
  Paddle (float paddleStartParameter, float ballDiaParameter) {
    netW = ballDiaParameter*2;
+   tableW = displayWidth;
    tableH = displayHeight * 8/10;
    tableY = displayHeight * 1/10;
    paddleW = ballDiaParameter*1/2;

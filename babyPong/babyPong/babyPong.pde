@@ -1,7 +1,7 @@
 //Global Vars and objects
 
 Ball myBall, movedBall;
-Ball[] fireworks = new Ball[30];
+Ball[] fireworks = new Ball[20];
 Confetti[] confettis = new Confetti[500];
 Paddle lPaddle, rPaddle;
 
@@ -9,7 +9,7 @@ color black=#000000, white=#FFFFFF, red=#951111, Lgreen=#27C149, gray=#CBCBCB;
 
 //Button exit;
 
-color tableColor = 150; //ERROR - move to table CLASSSSS!!!!!!! NOWWWW!!!!!! >:(
+color tableColor = gray; //ERROR - move to table CLASSSSS!!!!!!! NOWWWW!!!!!! >:(
 
 void setup() {
   noStroke();
@@ -42,8 +42,9 @@ void draw() {
   lPaddle.draw();
   rPaddle.draw();
   
-  myBall.tableYUpdate(rPaddle.tableY);
-  movedBall.tableYUpdate(rPaddle.tableY);
+  myBall.tableUpdate(rPaddle.tableX, rPaddle.tableY, rPaddle.tableW, rPaddle.tableH, rPaddle.paddleX, lPaddle.paddleX, rPaddle.paddleY, lPaddle.paddleY, rPaddle.paddleW, lPaddle.paddleW, rPaddle.paddleH, lPaddle.paddleH);
+  movedBall.tableUpdate(rPaddle.tableX, rPaddle.tableY, rPaddle.tableW, rPaddle.tableH, rPaddle.paddleX, lPaddle.paddleX, rPaddle.paddleY, lPaddle.paddleY, rPaddle.paddleW, lPaddle.paddleW, rPaddle.paddleH, lPaddle.paddleH);
+  
 
   if (myBall.disappear == true) {
     //empty IF
@@ -64,7 +65,7 @@ void keyPressed() {
   if (key == 'p' || key == 'P') {
     if (partyMode == false) {
       partyMode = true;
-      println(partyMode);
+      //println(partyMode);
     } else {
       partyMode = false;
       tableColor = 150;
