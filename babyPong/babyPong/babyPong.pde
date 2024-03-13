@@ -19,6 +19,7 @@ void setup() {
   /*screenSizeChecker(); for landscape, portrait, square views.
    Updated automatically for screen rotation on android.
    */
+   
   //population
   myBall = new Ball(); //both halves of the constructor.
   for (int i = 0; i < fireworks.length; i++) {
@@ -42,8 +43,9 @@ void draw() {
   lPaddle.draw();
   rPaddle.draw();
   
-  myBall.tableUpdate(rPaddle.tableX, rPaddle.tableY, rPaddle.tableW, rPaddle.tableH, rPaddle.paddleX, lPaddle.paddleX, rPaddle.paddleY, lPaddle.paddleY, rPaddle.paddleW, lPaddle.paddleW, rPaddle.paddleH, lPaddle.paddleH);
   movedBall.tableUpdate(rPaddle.tableX, rPaddle.tableY, rPaddle.tableW, rPaddle.tableH, rPaddle.paddleX, lPaddle.paddleX, rPaddle.paddleY, lPaddle.paddleY, rPaddle.paddleW, lPaddle.paddleW, rPaddle.paddleH, lPaddle.paddleH);
+  myBall.tableUpdate(rPaddle.tableX, rPaddle.tableY, rPaddle.tableW, rPaddle.tableH, rPaddle.paddleX, lPaddle.paddleX, rPaddle.paddleY, lPaddle.paddleY, rPaddle.paddleW, lPaddle.paddleW, rPaddle.paddleH, lPaddle.paddleH);
+  
   
 
   if (myBall.disappear == true) {
@@ -65,9 +67,10 @@ void keyPressed() {
   if (key == 'p' || key == 'P') {
     if (partyMode == false) {
       partyMode = true;
-      //println(partyMode);
+      println("partyMode on!");
     } else {
       partyMode = false;
+      println("partyMode off!");
       tableColor = 150;
     }
   }
@@ -82,6 +85,7 @@ void keyReleased() {
 }
 
 void mousePressed() {
+  println("ball moved!");
   if (myBall.disappear == false) {
     movedBall = new Ball(mouseX, mouseY, myBall.dia, myBall.ballCol, myBall.xSpeed, myBall.ySpeed, myBall.xSpeedChange, myBall.ySpeedChange);
     myBall.disappear = true;

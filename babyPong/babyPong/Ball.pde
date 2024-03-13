@@ -52,8 +52,6 @@ class Ball {
     this.ySpeed = ySpeedParameter;
     this.xSpeedChange = xSpeedChangeParameter;
     this.ySpeedChange = ySpeedChangeParameter;
-    
-    //old ball instance = new ball instance.
   }//end movedBall constructor
   
   float xSpeedChange() {
@@ -88,21 +86,21 @@ class Ball {
   }//endBallStep
   
   void bounce() {
-    if ( x < (tableW * 1/2)) {
-      if (x < paddleX + (dia/2) && y > paddleY && y < (paddleY + paddleH)) {
-        xSpeed = -1;
+    if (this.x >= (tableW * 1/2)) {
+      if ((this.x + (dia*1/2)) >= (this.paddleX + this.paddleW) && this.y >= this.paddleY && this.y <= (this.paddleY + this.paddleH)) {
+        xSpeed *= -1;
       }
     } else {
-      
+     if ((this.x - (dia*1/2)) <= this.paddleX && this.y >= this.paddleY && this.y <= (this.paddleY + this.paddleH)) {
+        xSpeed *= -1;
+      } 
     }
-    
-    /*
-    if (x < 0 + (dia/2) || x > displayWidth - (dia/2)) {
+    if(y < tableY + (dia/2) || y > (tableY + tableH - (dia/2))) {
+      ySpeed *= -1;
+    } 
+    if (x < 0 + (dia/2) || x > tableW - (dia/2)) {
       xSpeed *=  -1;
     }
-    if(y < tableY + (dia/2) || y > displayHeight - (dia/2)) {
-      ySpeed *= -1;
-    }*/
   }//end ballBounce
   
   void netExplosion(float xParameter, float yParameter, float gravityParameter) {
