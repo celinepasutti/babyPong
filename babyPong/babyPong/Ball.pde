@@ -8,6 +8,7 @@ class Ball {
   float xSpeedChange = 1.0, ySpeedChange = 1.0;
   float gravity = 0.0;
   boolean disappear = false;
+  boolean pongBall;
   float tableX, tableY, tableW, tableH, paddleX, paddleY, paddleW, paddleH;
   //static int count = 25
   
@@ -28,6 +29,7 @@ class Ball {
     this.ySpeed = 3*ySpeedChange();
     this.xSpeedChange = 1.0; //break bounce physics - change speed
     this.ySpeedChange = 1.0;
+    pongBall = true;
   } //end ball constructor
   
   //firework constructor - multiple constructors by identifying different parameters.
@@ -40,6 +42,7 @@ class Ball {
     this.xSpeed = random(-5, 5); //Can return 0
     this.ySpeed = random(-5, 5); //Can return 0
     gravity = gravityParameter;
+    pongBall = false;
   }//end firework constructor 
   
   //movedBall constructor -- must look like old ball instance ( same color, same size ) and make old ball instance disappear.
@@ -52,6 +55,7 @@ class Ball {
     this.ySpeed = ySpeedParameter;
     this.xSpeedChange = xSpeedChangeParameter;
     this.ySpeedChange = ySpeedChangeParameter;
+    pongBall = true;
   }//end movedBall constructor
   
   float xSpeedChange() {
@@ -86,6 +90,7 @@ class Ball {
   }//endBallStep
   
   void bounce() {
+   if(pongBall == true) {
     if (this.x < (tableW * 1/2)) { 
       if (this.x <= (this.paddleX + dia) && this.y >= this.paddleY && this.y <= (this.paddleY + this.paddleH)) {
         xSpeed *= -1;
@@ -101,6 +106,14 @@ class Ball {
     if (x < 0 + (dia/2) || x > tableW - (dia/2)) {
       xSpeed *=  -1;
     }
+  } else {
+    if(y < tableX + (dia/2) || y > (tableY + tableH - (dia/2))) {
+      ySpeed *= -1;
+    } 
+    if (x < 0 + (dia/2) || x > tableW - (dia/2)) {
+      xSpeed *=  -1;
+    }
+   }
   }//end ballBounce
   
   void netExplosion(float xParameter, float yParameter, float gravityParameter) {
@@ -109,11 +122,14 @@ class Ball {
     }
   }//end netExplosion
   
-  void tableUpdate(float tableXParameter, float tableYParameter, float tableWParameter, float tableHParameter, float rPaddleXParameter, float lPaddleXParameter, float rPaddleYParameter, float lPaddleYParameter, float rPaddleWParameter, float lPaddleWParameter, float rPaddleHParameter, float lPaddleHParameter) { //GETTERS AND SETTERS
+  void tableUpdate(float tableXParameter, float tableYParameter, float tableWParameter, float tableHParameter) { //GETTERS AND SETTERS
     tableX = tableXParameter;
     tableY = tableYParameter;
     tableW = tableWParameter;
     tableH = tableHParameter;
+  }
+  
+  void paddleUpdate(float rPaddleXParameter, float lPaddleXParameter, float rPaddleYParameter, float lPaddleYParameter, float rPaddleWParameter, float lPaddleWParameter, float rPaddleHParameter, float lPaddleHParameter) {
     paddleX = (x < (tableW * 1/2)) ? rPaddleXParameter: lPaddleXParameter;
     paddleY = (x < (tableW * 1/2)) ? rPaddleYParameter: lPaddleYParameter;
     paddleW = (x < (tableW * 1/2)) ? rPaddleWParameter: lPaddleWParameter;

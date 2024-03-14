@@ -3,18 +3,19 @@
 
 class Paddle {
  //class vars
- float tableX, tableY, tableW, tableH;
  float netX, netY, netW, netH;
  float paddleX, paddleY, paddleW, paddleH, paddleHeightRef;
  float paddleSpeed;
  color paddleCol;
  Boolean up = false, down = false;
  
+ float tableX = 0;
+ float tableW = displayWidth;
+ float tableH = displayHeight * 8/10;
+ float tableY = displayHeight * 1/10;
+ 
  Paddle (float paddleStartParameter, float ballDiaParameter) {
    netW = ballDiaParameter*2;
-   tableW = displayWidth;
-   tableH = displayHeight * 8/10;
-   tableY = displayHeight * 1/10;
    paddleW = ballDiaParameter*1/2;
    paddleHeightRef = 0.25;
    if (paddleStartParameter ==  0) {
