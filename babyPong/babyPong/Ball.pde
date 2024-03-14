@@ -86,12 +86,12 @@ class Ball {
   }//endBallStep
   
   void bounce() {
-    if (this.x >= (tableW * 1/2)) {
-      if ((this.x + (dia*1/2)) >= (this.paddleX + this.paddleW) && this.y >= this.paddleY && this.y <= (this.paddleY + this.paddleH)) {
+    if (this.x < (tableW * 1/2)) { 
+      if (this.x <= (this.paddleX + dia) && this.y >= this.paddleY && this.y <= (this.paddleY + this.paddleH)) {
         xSpeed *= -1;
       }
     } else {
-     if ((this.x - (dia*1/2)) <= this.paddleX && this.y >= this.paddleY && this.y <= (this.paddleY + this.paddleH)) {
+     if (this.x >= (this.paddleX + this.paddleW - dia) && this.y >= this.paddleY && this.y <= (this.paddleY + this.paddleH)) {
         xSpeed *= -1;
       } 
     }
