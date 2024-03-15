@@ -19,7 +19,7 @@ void setup() {
   /*screenSizeChecker(); for landscape, portrait, square views.
    Updated automatically for screen rotation on android.
    */
-   
+
   //population
   myBall = new Ball(); //both halves of the constructor.
   for (int i = 0; i < fireworks.length; i++) {
@@ -30,9 +30,9 @@ void setup() {
 
   rPaddle = new Paddle(0, myBall.dia);
   lPaddle = new Paddle(displayWidth, myBall.dia);
-  
+
   myBall.tableUpdate(rPaddle.tableX, rPaddle.tableY, rPaddle.tableW, rPaddle.tableH);
-  
+
   for (int i = 0; i < fireworks.length; i++) {
     fireworks[i] = new Ball(displayWidth * -1, displayHeight * -1, 0.5);
   }
@@ -41,16 +41,13 @@ void setup() {
 void draw() {
   background(tableColor);
   partyMode();
-  
+
   for (int i = 0; i < fireworks.length; i++) {
     fireworks[i].draw();
   }
-  
+
   lPaddle.draw();
   rPaddle.draw();
-  
-  myBall.paddleUpdate(rPaddle.paddleX, lPaddle.paddleX, rPaddle.paddleY, lPaddle.paddleY, rPaddle.paddleW, lPaddle.paddleW, rPaddle.paddleH, lPaddle.paddleH);
-  movedBall.paddleUpdate(rPaddle.paddleX, lPaddle.paddleX, rPaddle.paddleY, lPaddle.paddleY, rPaddle.paddleW, lPaddle.paddleW, rPaddle.paddleH, lPaddle.paddleH);
 
   if (myBall.disappear == true) {
     //empty IF
@@ -61,16 +58,22 @@ void draw() {
   if (myBall.disappear == false  && myBall.x < myBall.dia || myBall.x > (displayWidth - myBall.dia)) { //goal - firework execution is based on x value. triggers are left goal and right goal.
     myBall.netExplosion(myBall.x, myBall.y, 0.5);
     for (int i = 0; i < fireworks.length; i++) {
-    fireworks[i].tableUpdate(rPaddle.tableX, rPaddle.tableY, rPaddle.tableW, rPaddle.tableH);
-  }
+      fireworks[i].tableUpdate(rPaddle.tableX, rPaddle.tableY, rPaddle.tableW, rPaddle.tableH);
+    }
   } else if (myBall.disappear == true && movedBall.x < movedBall.dia || movedBall.x > (displayWidth - movedBall.dia)) {
     movedBall.netExplosion(movedBall.x, movedBall.y, 0.5);
     for (int i = 0; i < fireworks.length; i++) {
-    fireworks[i].tableUpdate(rPaddle.tableX, rPaddle.tableY, rPaddle.tableW, rPaddle.tableH);
-  }
+      fireworks[i].tableUpdate(rPaddle.tableX, rPaddle.tableY, rPaddle.tableW, rPaddle.tableH);
+    }
   }
   movedBall.draw();
-  //exit.draw();
+  //println(movedBall.x);
+
+  if (myBall.disappear == true) {
+    movedBall.paddleUpdate(rPaddle.paddleX, lPaddle.paddleX, rPaddle.paddleY, lPaddle.paddleY, rPaddle.paddleW, lPaddle.paddleW, rPaddle.paddleH, lPaddle.paddleH);
+  } else {
+    myBall.paddleUpdate(rPaddle.paddleX, lPaddle.paddleX, rPaddle.paddleY, lPaddle.paddleY, rPaddle.paddleW, lPaddle.paddleW, rPaddle.paddleH, lPaddle.paddleH);
+  }
 }
 
 void keyPressed() {
@@ -84,7 +87,7 @@ void keyPressed() {
       tableColor = 150;
     }
   }
-  
+
   rPaddle.keyPressedWASD();
   lPaddle.keyPressedARROW();
 }
@@ -96,12 +99,12 @@ void keyReleased() {
 
 void mousePressed() {
   println("ball moved!");
-  if (myBall.disappear == false) { 
+  if (myBall.disappear == false) {
     movedBall = new Ball(mouseX, mouseY, myBall.dia, myBall.ballCol, myBall.xSpeed, myBall.ySpeed, myBall.xSpeedChange, myBall.ySpeedChange);
     movedBall.tableUpdate(rPaddle.tableX, rPaddle.tableY, rPaddle.tableW, rPaddle.tableH);
     myBall.disappear = true;
   } else {
-    movedBall = new Ball(mouseX, mouseY, myBall.dia, myBall.ballCol, movedBall.xSpeed, movedBall.ySpeed, movedBall.xSpeedChange, movedBall.ySpeedChange);  
+    movedBall = new Ball(mouseX, mouseY, myBall.dia, myBall.ballCol, movedBall.xSpeed, movedBall.ySpeed, movedBall.xSpeedChange, movedBall.ySpeedChange);
     movedBall.tableUpdate(rPaddle.tableX, rPaddle.tableY, rPaddle.tableW, rPaddle.tableH);
     myBall.disappear = true;
   }
