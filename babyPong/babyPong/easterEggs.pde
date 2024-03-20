@@ -14,6 +14,7 @@ void partyMode() {
 
 class Confetti {
   float x, y, wh;
+  float stepSpeed;
   color confettiCol;
 
   Confetti(float xParameter, float yParameter, float whParameter) {
@@ -21,6 +22,7 @@ class Confetti {
     this.y = yParameter;
     this.wh = whParameter;
     this.confettiCol = color (int(random(255)), int(random(255)), int(random(255)));
+    this.stepSpeed = random(2, 4);
   }
 
   void draw() {
@@ -31,7 +33,7 @@ class Confetti {
   }
 
   void step() {
-    y += 3;
+    y += stepSpeed;
     if (y > displayHeight) {
       y = 0;
     }

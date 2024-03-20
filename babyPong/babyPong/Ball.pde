@@ -8,8 +8,7 @@ class Ball {
   float xSpeedChange = 1.0, ySpeedChange = 1.0;
   float gravity = 0.0;
   boolean disappear = false;
-  boolean mySide;
-  boolean pongBall;
+  boolean mySide, pongBall;
   float tableX, tableY, tableW, tableH, paddleX, paddleY, paddleW, paddleH;
   //static int count = 25
 

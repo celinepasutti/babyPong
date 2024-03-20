@@ -3,7 +3,7 @@
 Ball myBall, movedBall;
 Ball[] fireworks = new Ball[20];
 Confetti[] confettis = new Confetti[500];
-Paddle table, lPaddle, rPaddle;
+Paddle table, exitBut, lPaddle, rPaddle;
 
 color black=#000000, white=#FFFFFF, red=#951111, Lgreen=#27C149, gray=#CBCBCB;
 
@@ -31,6 +31,7 @@ void setup() {
   rPaddle = new Paddle(0, myBall.ballDia, white);
   lPaddle = new Paddle(displayWidth, myBall.ballDia, white);
   table = new Paddle();
+  //exitBut = new Paddle ();
 
   myBall.tableUpdate(rPaddle.tableX, rPaddle.tableY, rPaddle.tableW, rPaddle.tableH);
 
@@ -88,7 +89,6 @@ void keyPressed() {
     } else {
       partyMode = false;
       println("partyMode off!");
-      tableColor = 150;
     }
   }
 

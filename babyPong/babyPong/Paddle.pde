@@ -5,13 +5,12 @@ class Paddle {
   //class vars
   float netX, netY, netW, netH;
   float paddleX, paddleY, paddleW, paddleH, paddleHeightRef;
-  //float butX, butY, butW, butH;
+  float butX, butY, butW, butH;
   //float menuX, menuY, menuW, menuH;
   float paddleSpeed;
   color paddleCol;
-  //color butCol;
   boolean up = false, down = false;
-  boolean paddle;
+  boolean paddle, button;
 
   float tableX = 0;
   float tableW = displayWidth;
@@ -20,6 +19,7 @@ class Paddle {
 
   Paddle (float paddleStartParameter, float ballDiaParameter, color paddleColParameter) {
     paddle = true;
+    button = false;
     netW = ballDiaParameter*2;
     paddleW = ballDiaParameter*1/2;
     paddleHeightRef = 0.25;
@@ -41,35 +41,49 @@ class Paddle {
     this.down = false;
   }
 
-  /*Paddle (float menuXParameter, float menuYParameter, float menuWParameter, float menuHParameter) { //menu
-    this.paddleCol = 255;
-    paddle = false;
-    this.menuX = menuXParameter;
-    this.menuY = menuYParameter;
-    this.menuW = menuWParameter;
-    this.menuH = menuHParameter;
-  }*/
-  
   Paddle () { //table
     paddle = false;
   }
 
+  Paddle (float butXParameter, float butYParameter, float butWParameter, float butHParameter, color butColParameter) { // button
+    paddle = false;
+    button = true;
+    this.butX = butXParameter;
+    this.butY = butYParameter;
+    this.butW = butWParameter;
+    this.butH = butHParameter;
+    this.paddleCol = butColParameter;
+  }
+
   void draw() {
-   if (paddle == false) {
-    fill(gray);
-    rect(tableX, tableY, tableW, tableH);
-    fill(0);
-   }
-    
+    table();
     paddles();
     fill(0);
   }//end draw
 
-  /*void setup() {
-      fill(paddleCol);
-      rect(menuX, menuY, menuW, menuH);
+  void table() {
+    if (paddle == false && button == false) {
+      fill(gray);
+      rect(tableX, tableY, tableW, tableH);
       fill(0);
-  }*/
+    }
+  }
+  
+  void button() {
+    if (button == true) {
+      if (mouseX >= this.butX && mouseX <= (this.butX + this.butW) && mouseY >= this.butY && mouseY <= (this.butY + this.butH)) {
+      noStroke();
+      fill (paddleCol);
+      rect(butX, butY, butW, butH);
+      fill (0);
+    } else {
+      noStroke();
+      fill (tableColor);
+      rect(butX, butY, butW, butH);
+      fill (0);
+    }
+    }
+  }
 
   void paddles() {
     if (paddle == true) {
@@ -81,7 +95,6 @@ class Paddle {
       if (down == true) {
         movePaddleDown();
       }
-    } else {
     }
   }
 
