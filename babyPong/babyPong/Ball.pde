@@ -2,7 +2,7 @@
  night mode - ball color is full blue*/
 class Ball {
   //Ball Global Vars
-  float x, y, dia;
+  float ballX, ballY, ballDia;
   color ballCol;
   float xSpeed, ySpeed;
   float xSpeedChange = 1.0, ySpeedChange = 1.0;
@@ -22,9 +22,9 @@ class Ball {
     int referentMeasure = (displayWidth < displayHeight) ? displayWidth: displayHeight; //review ternary operator
 
     //object vars
-    this.x = startx;
-    this.y = starty;
-    this.dia = referentMeasure*1/20;
+    this.ballX = startx;
+    this.ballY = starty;
+    this.ballDia = referentMeasure*1/20;
     this.ballCol = 255; //random(255) also applicable. Casting from float to int.
     this.xSpeed = 3*xSpeedChange();
     this.ySpeed = 3*ySpeedChange();
@@ -36,10 +36,10 @@ class Ball {
   //firework constructor - multiple constructors by identifying different parameters.
   Ball(float xParameter, float yParameter, float gravityParameter) {
     //Ball(); //placeholder
-    this.x = xParameter; //ERROR: trigger when the Ball enters goal area
-    this.y = yParameter; //ERROR: trigger when the Ball enters goal area
+    this.ballX = xParameter; //ERROR: trigger when the Ball enters goal area
+    this.ballY = yParameter; //ERROR: trigger when the Ball enters goal area
     this.ballCol = color (int(random(255)), int(random(255)), int(random(255))) ; //random(), random()-shortcut, casting from float to intin color var
-    this.dia = random(width*1/70); //returns unseen diamters
+    this.ballDia = random(width*1/70); //returns unseen diamters
     this.xSpeed = random(-5, 5); //Can return 0
     this.ySpeed = random(-5, 5); //Can return 0
     gravity = gravityParameter;
@@ -48,9 +48,9 @@ class Ball {
 
   //movedBall constructor -- must look like old ball instance ( same color, same size ) and make old ball instance disappear.
   Ball(float xParameter, float yParameter, float diaParameter, color colParameter, float xSpeedParameter, float ySpeedParameter, float xSpeedChangeParameter, float ySpeedChangeParameter) {
-    this.x = xParameter;
-    this.y = yParameter;
-    this.dia = diaParameter;
+    this.ballX = xParameter;
+    this.ballY = yParameter;
+    this.ballDia = diaParameter;
     this.ballCol = colParameter;
     this.xSpeed = xSpeedParameter;
     this.ySpeed = ySpeedParameter;
@@ -77,7 +77,7 @@ class Ball {
 
   void draw() {
     fill(ballCol);
-    ellipse(x, y, dia, dia); //easter egg at bounce - dia will change to create the effect of a "squish".
+    ellipse(ballX, ballY, ballDia, ballDia); //easter egg at bounce - dia will change to create the effect of a "squish".
     fill(0);
 
     step(); //manipulating the variables.
@@ -86,10 +86,10 @@ class Ball {
   void step() {
     bounce();
     ySpeed += gravity; //Ball() is not affected - thus, the pong ball has no gravity.
-    x += xSpeed * xSpeedChange;
-    y += ySpeed * ySpeedChange;
+    ballX += xSpeed * xSpeedChange;
+    ballY += ySpeed * ySpeedChange;
 
-    if (this.x <= (tableW*1/2)) {
+    if (this.ballX <= (tableW*1/2)) {
       mySide = true;
     } else {
       mySide = false;
@@ -99,35 +99,35 @@ class Ball {
   void bounce() {
     if (pongBall == true) {
       if (mySide == true) {
-        if (this.x < (paddleX + paddleW + (dia/2)) && this.y > paddleY && this.y < (paddleY + paddleH)) {
-          if (this.x > paddleX - dia) {
-            this.x = (paddleX + paddleW + (dia/2));
+        if (this.ballX < (paddleX + paddleW + (ballDia/2)) && this.ballY > paddleY && this.ballY < (paddleY + paddleH)) {
+          if (this.ballX > paddleX - ballDia) {
+            this.ballX = (paddleX + paddleW + (ballDia/2));
             xSpeed *= -1;
           } else {
             xSpeed *= -1;
           }
         }
       } else {
-        if (this.x > (paddleX - (dia/2)) && this.y > paddleY && this.y < (paddleY + paddleH)) {
-          if (this.x < paddleX + dia) {
-            this.x = (paddleX - (dia/2));
+        if (this.ballX > (paddleX - (ballDia/2)) && this.ballY > paddleY && this.ballY < (paddleY + paddleH)) {
+          if (this.ballX < paddleX + ballDia) {
+            this.ballX = (paddleX - (ballDia/2));
             xSpeed *= -1;
           } else {
             xSpeed *= -1;
           }
         }
       }
-      if (y < tableY + (dia/2) || y > (tableY + tableH - (dia/2))) {
+      if (ballY < tableY + (ballDia/2) || ballY > (tableY + tableH - (ballDia/2))) {
         ySpeed *= -1;
       }
-      if (x < 0 + (dia/2) || x > tableW - (dia/2)) {
+      if (ballX < 0 + (ballDia/2) || ballX > tableW - (ballDia/2)) {
         xSpeed *=  -1;
       }
     } else {
-      if (y < tableX + (dia/2) || y > (tableY + tableH - (dia/2))) {
+      if (ballY < tableX + (ballDia/2) || ballY > (tableY + tableH - (ballDia/2))) {
         ySpeed *= -1;
       }
-      if (x < 0 + (dia/2) || x > tableW - (dia/2)) {
+      if (ballX < 0 + (ballDia/2) || ballX > tableW - (ballDia/2)) {
         xSpeed *=  -1;
       }
     }
@@ -147,9 +147,9 @@ class Ball {
   }
 
   void paddleUpdate(float rPaddleXParameter, float lPaddleXParameter, float rPaddleYParameter, float lPaddleYParameter, float rPaddleWParameter, float lPaddleWParameter, float rPaddleHParameter, float lPaddleHParameter) {
-    paddleX = (x <= (tableW * 1/2)) ? rPaddleXParameter: lPaddleXParameter;
-    paddleY = (x <= (tableW * 1/2)) ? rPaddleYParameter: lPaddleYParameter;
-    paddleW = (x <= (tableW * 1/2)) ? rPaddleWParameter: lPaddleWParameter;
-    paddleH = (x <= (tableW * 1/2)) ? rPaddleHParameter: lPaddleHParameter;
+    paddleX = (ballX <= (tableW * 1/2)) ? rPaddleXParameter: lPaddleXParameter;
+    paddleY = (ballX <= (tableW * 1/2)) ? rPaddleYParameter: lPaddleYParameter;
+    paddleW = (ballX <= (tableW * 1/2)) ? rPaddleWParameter: lPaddleWParameter;
+    paddleH = (ballX <= (tableW * 1/2)) ? rPaddleHParameter: lPaddleHParameter;
   }
 }//end Ball
