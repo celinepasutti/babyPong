@@ -1,5 +1,6 @@
 //Global Vars and objects
 
+
 Ball myBall, movedBall;
 Ball[] fireworks = new Ball[20];
 Confetti[] confettis = new Confetti[500];
@@ -7,18 +8,18 @@ Paddle table, exitBut, lPaddle, rPaddle;
 
 color black=#000000, white=#FFFFFF, red=#951111, Lgreen=#27C149, gray=#CBCBCB;
 
-//Button exit;
-
 color tableColor = gray;//ERROR - move to table CLASSSSS!!!!!!! NOWWWW!!!!!! >:(
 
 void setup() {
+  println("intiated");
   noStroke();
   fullScreen();  
   createConfetti();
-  //font = createFont("Roboto", 55);
   /*screenSizeChecker(); for landscape, portrait, square views.
    Updated automatically for screen rotation on android.
    */
+  //String[] fontList = PFont.list();
+  //printArray(fontList);
 
   //population
   myBall = new Ball(); //both halves of the constructor.
@@ -31,7 +32,7 @@ void setup() {
   rPaddle = new Paddle(0, myBall.ballDia, white);
   lPaddle = new Paddle(displayWidth, myBall.ballDia, white);
   table = new Paddle();
-  //exitBut = new Paddle ();
+  exitBut = new Paddle ("x", 40, black, red, displayWidth*17/20, displayHeight/30, displayWidth/10, displayHeight/24);
 
   myBall.tableUpdate(rPaddle.tableX, rPaddle.tableY, rPaddle.tableW, rPaddle.tableH);
 
@@ -44,6 +45,8 @@ void draw() {
   background(0);
   partyMode();
   table.draw();
+  
+  
 
   for (int i = 0; i < fireworks.length; i++) {
     fireworks[i].draw();
@@ -78,7 +81,7 @@ void draw() {
     myBall.paddleUpdate(rPaddle.paddleX, lPaddle.paddleX, rPaddle.paddleY, lPaddle.paddleY, rPaddle.paddleW, lPaddle.paddleW, rPaddle.paddleH, lPaddle.paddleH);
   }
   
-  
+  exitBut.draw();
 }
 
 void keyPressed() {
@@ -113,9 +116,10 @@ void mousePressed() {
     myBall.disappear = true;
   }
 
-  /* if (mouseX>=exit.x && mouseX<=exit.x+exit.w && mouseY>=exit.y && mouseY<=exit.y+exit.h) {
+  if (mouseX >= exitBut.butX && mouseX <= (exitBut.butX + exitBut.butW) && mouseY >= exitBut.butY && mouseY <= (exitBut.butY + exitBut.butH)) {
+   println("terminated");
    exit();
-   }*/
+   }
 }
 
 //endDRIVER

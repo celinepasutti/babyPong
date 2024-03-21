@@ -2,13 +2,15 @@
 //// keyPressed --> draw(); encapsulate later on.
 
 class Paddle {
+  PFont font = createFont("MS UI Gothic", 55);
   //class vars
   float netX, netY, netW, netH;
   float paddleX, paddleY, paddleW, paddleH, paddleHeightRef;
   float butX, butY, butW, butH;
-  //float menuX, menuY, menuW, menuH;
   float paddleSpeed;
-  color paddleCol;
+  color paddleCol, textCol, butCol;
+  int textSize;
+  String buttonText;
   boolean up = false, down = false;
   boolean paddle, button;
 
@@ -45,19 +47,24 @@ class Paddle {
     paddle = false;
   }
 
-  Paddle (float butXParameter, float butYParameter, float butWParameter, float butHParameter, color butColParameter) { // button
+  Paddle (String textParameter, int textSizeParameter, color textColParameter, color butColParameter, float butXParameter, float butYParameter, float butWParameter, float butHParameter) { // button
     paddle = false;
     button = true;
     this.butX = butXParameter;
     this.butY = butYParameter;
     this.butW = butWParameter;
     this.butH = butHParameter;
+    this.butCol = butColParameter;
     this.paddleCol = butColParameter;
+    this.buttonText = textParameter;
+    this.textSize = textSizeParameter;
+    this.textCol = textColParameter;
   }
 
   void draw() {
     table();
     paddles();
+    button();
     fill(0);
   }//end draw
 
@@ -68,20 +75,19 @@ class Paddle {
       fill(0);
     }
   }
-  
+
   void button() {
     if (button == true) {
       if (mouseX >= this.butX && mouseX <= (this.butX + this.butW) && mouseY >= this.butY && mouseY <= (this.butY + this.butH)) {
-      noStroke();
-      fill (paddleCol);
+        this.butCol = paddleCol;
+      } else {
+        this.butCol = tableColor;
+      }
+      fill(butCol);
       rect(butX, butY, butW, butH);
-      fill (0);
-    } else {
-      noStroke();
-      fill (tableColor);
-      rect(butX, butY, butW, butH);
-      fill (0);
-    }
+      fill(textCol);
+      createText(this.butX, this.butY, this.butW, this.butH);
+      fill(0);
     }
   }
 
@@ -150,5 +156,13 @@ class Paddle {
     if (key == CODED && keyCode == DOWN) {
       down = false;
     }
+  }
+
+  void createText (float textX, float textY, float textW, float textH) {
+    fill(textCol);
+    textAlign (CENTER, CENTER);
+    textFont(font, textSize);
+    text(buttonText, textX, textY, textW, textH);
+    fill(0);
   }
 }// end class
