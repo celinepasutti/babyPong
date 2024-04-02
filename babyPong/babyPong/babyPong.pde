@@ -4,7 +4,7 @@
 Ball myBall, movedBall;
 Ball[] fireworks = new Ball[20];
 Confetti[] confettis = new Confetti[500];
-Paddle table, exitBut, lPaddle, rPaddle;
+Paddle table, exitBut, restartBut, oneBut, twoBut, screenSaverBut, lPaddle, rPaddle;
 
 color black=#000000, white=#FFFFFF, red=#951111, Lgreen=#27C149, gray=#CBCBCB;
 
@@ -32,7 +32,12 @@ void setup() {
   rPaddle = new Paddle(0, myBall.ballDia, white);
   lPaddle = new Paddle(displayWidth, myBall.ballDia, white);
   table = new Paddle();
-  exitBut = new Paddle ("x", 40, black, red, displayWidth*17/20, displayHeight/30, displayWidth/10, displayHeight/24);
+  exitBut = new Paddle ("X", 30, black, red, displayWidth*17/20, displayHeight*1/30, displayWidth/10, displayHeight/24);
+  restartBut = new Paddle ("NEW", 20, black, Lgreen, displayWidth*1/20, displayHeight*1/30, displayWidth/10, displayHeight/24);
+  oneBut = new Paddle ("ONE PLAYER", 20, black, white, displayWidth*1/20, displayHeight*28/30, displayWidth/10, displayHeight/24);
+  twoBut = new Paddle ("TWO PLAYERS", 20, black, white, displayWidth*9/20, displayHeight*28/30, displayWidth/10, displayHeight/24);
+  screenSaverBut = new Paddle ("SCREEN SAVER", 20, black, white, displayWidth*17/20, displayHeight*28/30, displayWidth/10, displayHeight/24);
+
 
   myBall.tableUpdate(rPaddle.tableX, rPaddle.tableY, rPaddle.tableW, rPaddle.tableH);
 
@@ -82,11 +87,17 @@ void draw() {
   }
   
   exitBut.draw();
+  restartBut.draw();
+  oneBut.draw();
+  twoBut.draw();
+  screenSaverBut.draw();s
 }
 
 void keyPressed() {
   if (key == 'p' || key == 'P') {
     if (partyMode == false) {
+      //secondClicked = second();
+      //obj = secondClicked + 3;
       partyMode = true;
       println("partyMode on!");
     } else {

@@ -1,9 +1,12 @@
 boolean partyMode = false;
+//int secondClicked, secondCurrent, obj;
 
 void partyMode() {
   if (partyMode == true) {
     tableColor = color (random(255), random(255), random(255));
     //myBall.ballCol = color (random(255), random(255), random(255));
+    
+    //if(second = 
 
     for (int i = 0; i < confettis.length; i++) {
       confettis[i].draw();
