@@ -90,7 +90,7 @@ void draw() {
   restartBut.draw();
   oneBut.draw();
   twoBut.draw();
-  screenSaverBut.draw();s
+  screenSaverBut.draw();
 }
 
 void keyPressed() {
