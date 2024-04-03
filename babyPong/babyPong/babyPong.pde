@@ -10,10 +10,12 @@ color black=#000000, white=#FFFFFF, red=#951111, Lgreen=#27C149, gray=#CBCBCB;
 
 color tableColor = gray;//ERROR - move to table CLASSSSS!!!!!!! NOWWWW!!!!!! >:(
 
+int rScore, lScore;
+
 void setup() {
   println("intiated");
   noStroke();
-  fullScreen();  
+  fullScreen();
   createConfetti();
   /*screenSizeChecker(); for landscape, portrait, square views.
    Updated automatically for screen rotation on android.
@@ -50,8 +52,8 @@ void draw() {
   background(0);
   partyMode();
   table.draw();
-  
-  
+
+
 
   for (int i = 0; i < fireworks.length; i++) {
     fireworks[i].draw();
@@ -66,17 +68,33 @@ void draw() {
     myBall.draw();
   }
 
-  if (myBall.disappear == false  && myBall.ballX < myBall.ballDia || myBall.ballX > (displayWidth - myBall.ballDia)) { //goal - firework execution is based on x value. triggers are left goal and right goal.
-    myBall.netExplosion(myBall.ballX, myBall.ballY, 0.5);
+  if (myBall.disappear == false) { //goal - firework execution is based on x value. triggers are left goal and right goal.
+    if (myBall.ballX < myBall.ballDia) {
+      myBall.netExplosion(myBall.ballX, myBall.ballY, 0.5);
+      lScore += 1;
+    }
+    if (myBall.ballX > (displayWidth - myBall.ballDia)) {
+      myBall.netExplosion(myBall.ballX, myBall.ballY, 0.5);
+      rScore += 1;
+    }
     for (int i = 0; i < fireworks.length; i++) {
       fireworks[i].tableUpdate(rPaddle.tableX, rPaddle.tableY, rPaddle.tableW, rPaddle.tableH);
     }
-  } else if (myBall.disappear == true && movedBall.ballX < movedBall.ballDia || movedBall.ballX > (displayWidth - movedBall.ballDia)) {
-    movedBall.netExplosion(movedBall.ballX, movedBall.ballY, 0.5);
+  } else if (myBall.disappear == true) {
+    if (movedBall.ballX < movedBall.ballDia) {
+      movedBall.netExplosion(movedBall.ballX, movedBall.ballY, 0.5);
+      lScore += 1;
+    }
+    if (movedBall.ballX > (displayWidth - movedBall.ballDia)) {
+      movedBall.netExplosion(movedBall.ballX, movedBall.ballY, 0.5);
+      rScore += 1;
+    }
     for (int i = 0; i < fireworks.length; i++) {
       fireworks[i].tableUpdate(rPaddle.tableX, rPaddle.tableY, rPaddle.tableW, rPaddle.tableH);
     }
   }
+  println("left score", lScore);
+  println("right score", rScore);
   movedBall.draw();
   //println(movedBall.x);
 
@@ -85,7 +103,7 @@ void draw() {
   } else {
     myBall.paddleUpdate(rPaddle.paddleX, lPaddle.paddleX, rPaddle.paddleY, lPaddle.paddleY, rPaddle.paddleW, lPaddle.paddleW, rPaddle.paddleH, lPaddle.paddleH);
   }
-  
+
   exitBut.draw();
   restartBut.draw();
   oneBut.draw();
@@ -128,9 +146,9 @@ void mousePressed() {
   }
 
   if (mouseX >= exitBut.butX && mouseX <= (exitBut.butX + exitBut.butW) && mouseY >= exitBut.butY && mouseY <= (exitBut.butY + exitBut.butH)) {
-   println("terminated");
-   exit();
-   }
+    println("terminated");
+    exit();
+  }
 }
 
 //endDRIVER
