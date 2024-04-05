@@ -4,7 +4,7 @@
 Ball myBall, movedBall;
 Ball[] fireworks = new Ball[20];
 Confetti[] confettis = new Confetti[500];
-Paddle table, exitBut, restartBut, oneBut, twoBut, screenSaverBut, lPaddle, rPaddle;
+Paddle table, exitBut, restartBut, oneBut, twoBut, screenSaverBut, lPaddle, rPaddle, rScoreB, lScoreB;
 
 color black=#000000, white=#FFFFFF, red=#951111, Lgreen=#27C149, gray=#CBCBCB;
 
@@ -39,6 +39,9 @@ void setup() {
   oneBut = new Paddle ("ONE PLAYER", 20, black, white, displayWidth*1/20, displayHeight*28/30, displayWidth/10, displayHeight/24);
   twoBut = new Paddle ("TWO PLAYERS", 20, black, white, displayWidth*9/20, displayHeight*28/30, displayWidth/10, displayHeight/24);
   screenSaverBut = new Paddle ("SCREEN SAVER", 20, black, white, displayWidth*17/20, displayHeight*28/30, displayWidth/10, displayHeight/24);
+  
+  rScoreB = new Paddle (str(rScore), 20, black, gray, displayWidth*6/20, displayHeight*1/30, displayWidth/10, displayHeight/24);
+  lScoreB = new Paddle (str(lScore), 20, black, gray, displayWidth*12/20, displayHeight*1/30, displayWidth/10, displayHeight/24);
 
 
   myBall.tableUpdate(rPaddle.tableX, rPaddle.tableY, rPaddle.tableW, rPaddle.tableH);
@@ -52,7 +55,7 @@ void draw() {
   background(0);
   partyMode();
   table.draw();
-
+  
 
 
   for (int i = 0; i < fireworks.length; i++) {
@@ -70,24 +73,32 @@ void draw() {
 
   if (myBall.disappear == false) { //goal - firework execution is based on x value. triggers are left goal and right goal.
     if (myBall.ballX < myBall.ballDia) {
-      myBall.netExplosion(myBall.ballX, myBall.ballY, 0.5);
       lScore += 1;
+      myBall.netExplosion(myBall.ballX, myBall.ballY, 0.5);
+      //myBall.ballX = myBall.startX;
+      //myBall.ballY = myBall.startY;
     }
     if (myBall.ballX > (displayWidth - myBall.ballDia)) {
-      myBall.netExplosion(myBall.ballX, myBall.ballY, 0.5);
       rScore += 1;
+      myBall.netExplosion(myBall.ballX, myBall.ballY, 0.5);
+      //myBall.ballX = myBall.startX;
+      //myBall.ballY = myBall.startY;
     }
     for (int i = 0; i < fireworks.length; i++) {
       fireworks[i].tableUpdate(rPaddle.tableX, rPaddle.tableY, rPaddle.tableW, rPaddle.tableH);
     }
   } else if (myBall.disappear == true) {
     if (movedBall.ballX < movedBall.ballDia) {
-      movedBall.netExplosion(movedBall.ballX, movedBall.ballY, 0.5);
       lScore += 1;
+      movedBall.netExplosion(movedBall.ballX, movedBall.ballY, 0.5);
+      //movedBall.ballX = myBall.startX;
+      //movedBall.ballY = myBall.startY;
     }
     if (movedBall.ballX > (displayWidth - movedBall.ballDia)) {
-      movedBall.netExplosion(movedBall.ballX, movedBall.ballY, 0.5);
       rScore += 1;
+      movedBall.netExplosion(movedBall.ballX, movedBall.ballY, 0.5);
+      //movedBall.ballX = myBall.startX;
+      //movedBall.ballY = myBall.startY;
     }
     for (int i = 0; i < fireworks.length; i++) {
       fireworks[i].tableUpdate(rPaddle.tableX, rPaddle.tableY, rPaddle.tableW, rPaddle.tableH);
@@ -109,6 +120,8 @@ void draw() {
   oneBut.draw();
   twoBut.draw();
   screenSaverBut.draw();
+  rScoreB.draw();
+  lScoreB.draw();
 }
 
 void keyPressed() {

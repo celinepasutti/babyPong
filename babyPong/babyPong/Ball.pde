@@ -10,19 +10,20 @@ class Ball {
   boolean disappear = false;
   boolean mySide, pongBall;
   float tableX, tableY, tableW, tableH, paddleX, paddleY, paddleW, paddleH;
+  int startX, startY;
   //static int count = 25
 
 
   //ball constructor
   Ball () {
     //local vars
-    int startx = displayWidth*1/2;
-    int starty = displayHeight*1/2;
+    startX = displayWidth*1/2;
+    startY = displayHeight*1/2;
     int referentMeasure = (displayWidth < displayHeight) ? displayWidth: displayHeight; //review ternary operator
 
     //object vars
-    this.ballX = startx;
-    this.ballY = starty;
+    this.ballX = startX;
+    this.ballY = startY;
     this.ballDia = referentMeasure*1/20;
     this.ballCol = 255; //random(255) also applicable. Casting from float to int.
     this.xSpeed = 3*xSpeedChange();
@@ -136,6 +137,8 @@ class Ball {
     for (int i = 0; i < fireworks.length; i++) {
       fireworks[i] = new Ball(xParameter, yParameter, gravityParameter);
     }
+    this.ballX = displayWidth*1/2;
+    this.ballY = displayHeight*1/2;
   }//end netExplosion
 
   void tableUpdate(float tableXParameter, float tableYParameter, float tableWParameter, float tableHParameter) { //GETTERS AND SETTERS
