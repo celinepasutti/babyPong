@@ -81,7 +81,7 @@ class Paddle {
       if (mouseX >= this.butX && mouseX <= (this.butX + this.butW) && mouseY >= this.butY && mouseY <= (this.butY + this.butH)) {
         this.butCol = paddleCol;
       } else {
-        this.butCol = tableColor;
+        this.butCol = black;
       }
       fill(butCol);
       rect(butX, butY, butW, butH);

@@ -11,6 +11,8 @@ color black=#000000, white=#FFFFFF, red=#951111, Lgreen=#27C149, gray=#CBCBCB;
 color tableColor = gray;//ERROR - move to table CLASSSSS!!!!!!! NOWWWW!!!!!! >:(
 
 int rScore, lScore;
+String rScoreTxt = str(rScore);
+String lScoreTxt = str(lScore);
 
 void setup() {
   println("intiated");
@@ -34,14 +36,13 @@ void setup() {
   rPaddle = new Paddle(0, myBall.ballDia, white);
   lPaddle = new Paddle(displayWidth, myBall.ballDia, white);
   table = new Paddle();
-  exitBut = new Paddle ("X", 30, black, red, displayWidth*17/20, displayHeight*1/30, displayWidth/10, displayHeight/24);
-  restartBut = new Paddle ("NEW", 20, black, Lgreen, displayWidth*1/20, displayHeight*1/30, displayWidth/10, displayHeight/24);
-  oneBut = new Paddle ("ONE PLAYER", 20, black, white, displayWidth*1/20, displayHeight*28/30, displayWidth/10, displayHeight/24);
-  twoBut = new Paddle ("TWO PLAYERS", 20, black, white, displayWidth*9/20, displayHeight*28/30, displayWidth/10, displayHeight/24);
-  screenSaverBut = new Paddle ("SCREEN SAVER", 20, black, white, displayWidth*17/20, displayHeight*28/30, displayWidth/10, displayHeight/24);
-  
-  rScoreB = new Paddle (str(rScore), 20, black, gray, displayWidth*6/20, displayHeight*1/30, displayWidth/10, displayHeight/24);
-  lScoreB = new Paddle (str(lScore), 20, black, gray, displayWidth*12/20, displayHeight*1/30, displayWidth/10, displayHeight/24);
+  exitBut = new Paddle ("X", 30, white, red, displayWidth*17/20, displayHeight*1/30, displayWidth/10, displayHeight/24);
+  restartBut = new Paddle ("NEW", 20, white, Lgreen, displayWidth*1/20, displayHeight*1/30, displayWidth/10, displayHeight/24);
+  oneBut = new Paddle ("ONE PLAYER", 20, white, tableColor, displayWidth*1/20, displayHeight*28/30, displayWidth/10, displayHeight/24);
+  twoBut = new Paddle ("TWO PLAYERS", 20, white, tableColor, displayWidth*9/20, displayHeight*28/30, displayWidth/10, displayHeight/24);
+  screenSaverBut = new Paddle ("SCREEN SAVER", 20, white, tableColor, displayWidth*17/20, displayHeight*28/30, displayWidth/10, displayHeight/24);
+
+
 
 
   myBall.tableUpdate(rPaddle.tableX, rPaddle.tableY, rPaddle.tableW, rPaddle.tableH);
@@ -51,12 +52,23 @@ void setup() {
   }
 }//endSetup
 
+void rScoreUpdate() {
+  rScore += 1;
+  rScoreTxt = str(rScore);
+}
+
+void lScoreUpdate() {
+  lScore += 1;
+  lScoreTxt = str(lScore);
+}
+
 void draw() {
   background(0);
   partyMode();
   table.draw();
-  
 
+  rScoreB = new Paddle (rScoreTxt, 50, white, black, displayWidth*6/20, displayHeight*1/30, displayWidth/10, displayHeight/24);
+  lScoreB = new Paddle (lScoreTxt, 50, white, black, displayWidth*12/20, displayHeight*1/30, displayWidth/10, displayHeight/24);
 
   for (int i = 0; i < fireworks.length; i++) {
     fireworks[i].draw();
@@ -73,32 +85,24 @@ void draw() {
 
   if (myBall.disappear == false) { //goal - firework execution is based on x value. triggers are left goal and right goal.
     if (myBall.ballX < myBall.ballDia) {
-      lScore += 1;
+      lScoreUpdate();
       myBall.netExplosion(myBall.ballX, myBall.ballY, 0.5);
-      //myBall.ballX = myBall.startX;
-      //myBall.ballY = myBall.startY;
     }
     if (myBall.ballX > (displayWidth - myBall.ballDia)) {
-      rScore += 1;
+      rScoreUpdate();
       myBall.netExplosion(myBall.ballX, myBall.ballY, 0.5);
-      //myBall.ballX = myBall.startX;
-      //myBall.ballY = myBall.startY;
     }
     for (int i = 0; i < fireworks.length; i++) {
       fireworks[i].tableUpdate(rPaddle.tableX, rPaddle.tableY, rPaddle.tableW, rPaddle.tableH);
     }
   } else if (myBall.disappear == true) {
     if (movedBall.ballX < movedBall.ballDia) {
-      lScore += 1;
+      lScoreUpdate();
       movedBall.netExplosion(movedBall.ballX, movedBall.ballY, 0.5);
-      //movedBall.ballX = myBall.startX;
-      //movedBall.ballY = myBall.startY;
     }
     if (movedBall.ballX > (displayWidth - movedBall.ballDia)) {
-      rScore += 1;
+      rScoreUpdate();
       movedBall.netExplosion(movedBall.ballX, movedBall.ballY, 0.5);
-      //movedBall.ballX = myBall.startX;
-      //movedBall.ballY = myBall.startY;
     }
     for (int i = 0; i < fireworks.length; i++) {
       fireworks[i].tableUpdate(rPaddle.tableX, rPaddle.tableY, rPaddle.tableW, rPaddle.tableH);
@@ -147,21 +151,23 @@ void keyReleased() {
 }
 
 void mousePressed() {
-  println("ball moved!");
-  if (myBall.disappear == false) {
-    movedBall = new Ball(mouseX, mouseY, myBall.ballDia, myBall.ballCol, myBall.xSpeed, myBall.ySpeed, myBall.xSpeedChange, myBall.ySpeedChange);
-    movedBall.tableUpdate(rPaddle.tableX, rPaddle.tableY, rPaddle.tableW, rPaddle.tableH);
-    myBall.disappear = true;
-  } else {
-    movedBall = new Ball(mouseX, mouseY, myBall.ballDia, myBall.ballCol, movedBall.xSpeed, movedBall.ySpeed, movedBall.xSpeedChange, movedBall.ySpeedChange);
-    movedBall.tableUpdate(rPaddle.tableX, rPaddle.tableY, rPaddle.tableW, rPaddle.tableH);
-    myBall.disappear = true;
+  if (mouseX > table.tableX && mouseX < (table.tableX + table.tableW) && mouseY > table.tableY && mouseY < (table.tableY + table.tableH)) { //movedBall error catch
+    println("ball moved!");
+    if (myBall.disappear == false) {
+      movedBall = new Ball(mouseX, mouseY, myBall.ballDia, myBall.ballCol, myBall.xSpeed, myBall.ySpeed, myBall.xSpeedChange, myBall.ySpeedChange);
+      movedBall.tableUpdate(rPaddle.tableX, rPaddle.tableY, rPaddle.tableW, rPaddle.tableH);
+      myBall.disappear = true;
+    } else {
+      movedBall = new Ball(mouseX, mouseY, myBall.ballDia, myBall.ballCol, movedBall.xSpeed, movedBall.ySpeed, movedBall.xSpeedChange, movedBall.ySpeedChange);
+      movedBall.tableUpdate(rPaddle.tableX, rPaddle.tableY, rPaddle.tableW, rPaddle.tableH);
+      myBall.disappear = true;
+    }
+  }
+    if (mouseX >= exitBut.butX && mouseX <= (exitBut.butX + exitBut.butW) && mouseY >= exitBut.butY && mouseY <= (exitBut.butY + exitBut.butH)) {
+      println("terminated");
+      exit();
+    }
   }
 
-  if (mouseX >= exitBut.butX && mouseX <= (exitBut.butX + exitBut.butW) && mouseY >= exitBut.butY && mouseY <= (exitBut.butY + exitBut.butH)) {
-    println("terminated");
-    exit();
-  }
-}
 
 //endDRIVER
