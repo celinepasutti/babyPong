@@ -1,2 +1,2 @@
 # babyPong
-CS30 practice proj.
+contemporary pong utilizing overloaded class constructors
